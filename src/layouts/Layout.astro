@@ -1,0 +1,40 @@
+---
+interface Props {
+	title: string;
+	description?: string;
+}
+
+const { title, description = "Nashi Cloud - Cloud Souverain et Hébergement Web Français" } = Astro.props;
+---
+
+<!doctype html>
+<html lang="fr" class="scroll-smooth">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content={description} />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+		<!-- Easter Egg #1: Pour les curieux qui inspectent le code -->
+		<!-- 
+			   _   _           _     _   _____ _                 _ 
+			  | \ | |         | |   (_) /  __ \ |               | |
+			  |  \| | __ _ ___| |__  _  | /  \/ | ___  _   _  __| |
+			  | . ` |/ _` / __| '_ \| | | |   | |/ _ \| | | |/ _` |
+			  | |\  | (_| \__ \ | | | | | \__/\ | (_) | |_| | (_| |
+			  \_| \_/\__,_|___/_| |_|_|  \____/_|\___/ \__,_|\__,_|
+			
+			  Bienvenue dans le code source ! 
+			  Si vous lisez ceci, vous aimez savoir comment les choses fonctionnent.
+			  C'est exactement pour ça qu'on a créé Nashi Cloud.
+			  Architecture maîtrisée, pas de boite noire.
+		-->
+	</head>
+	<body class="bg-nashi-100/30 text-nashi-900 antialiased">
+		<slot />
+	</body>
+</html>
+<style is:global>
+	/* Polices et styles globaux si nécessaire */
+</style>

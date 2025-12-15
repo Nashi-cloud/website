@@ -1,0 +1,54 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Conditions Générales de Vente | Nashi Cloud">
+  <Header />
+  <main class="pt-32 pb-24">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h1 class="text-4xl font-bold text-nashi-900 mb-12">Conditions Générales de Vente</h1>
+      
+      <div class="prose prose-lg prose-nashi text-nashi-900/80">
+        <div class="bg-nashi-100 p-6 rounded-lg border border-nashi-200 mb-8">
+          <p class="font-bold text-nashi-900">Note importante :</p>
+          <p class="mt-2">
+            La société Nashi Cloud étant en cours de création et le service commercial n'étant pas encore ouvert (lancement prévu Janvier 2026), les présentes CGV sont fournies à titre indicatif et seront mises à jour lors du lancement officiel.
+          </p>
+        </div>
+
+        <section class="mb-12">
+          <h2 class="text-2xl font-bold text-nashi-900 mb-4">1. Objet</h2>
+          <p>
+            Les présentes Conditions Générales de Vente (CGV) ont pour objet de définir les conditions techniques, juridiques et financières dans lesquelles Nashi Cloud s'engage à fournir ses services d'hébergement et de cloud computing au Client.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="text-2xl font-bold text-nashi-900 mb-4">2. Services proposés</h2>
+          <p>
+            Nashi Cloud proposera à son lancement :
+          </p>
+          <ul class="list-disc pl-6 mt-4 space-y-2">
+            <li>Location de Serveurs Privés Virtuels (VPS).</li>
+            <li>Hébergement de messagerie électronique professionnelle.</li>
+            <li>Stockage et partage de fichiers (Cloud).</li>
+            <li>Services d'inférence IA hébergés.</li>
+          </ul>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="text-2xl font-bold text-nashi-900 mb-4">3. Obligations de Nashi Cloud</h2>
+          <p>
+            Nashi Cloud s'engage à apporter tout le soin et la diligence nécessaires à la fourniture d'un service de qualité conformément aux usages de la profession et à l'état de l'art. Il s'agit d'une obligation de moyens.
+          </p>
+        </section>
+        
+        <!-- Easter Egg #3 -->
+        <!-- Article 42 : La réponse à la grande question sur la vie, l'univers et le reste est bien 42. -->
+      </div>
+    </div>
+  </main>
+  <Footer />
+</Layout>

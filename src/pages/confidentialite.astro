@@ -1,0 +1,55 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Politique de Confidentialité | Nashi Cloud">
+  <Header />
+  <main class="pt-32 pb-24">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h1 class="text-4xl font-bold text-nashi-900 mb-12">Politique de Confidentialité</h1>
+      
+      <div class="prose prose-lg prose-nashi text-nashi-900/80">
+        <p class="lead text-xl mb-8">
+          Chez Nashi Cloud, la confidentialité n'est pas une option, c'est notre cœur de métier. Voici comment nous traitons vos données sur ce site vitrine.
+        </p>
+
+        <section class="mb-12">
+          <h2 class="text-2xl font-bold text-nashi-900 mb-4">1. Collecte des données</h2>
+          <p>
+            Sur ce site vitrine, nous collectons uniquement les données que vous nous transmettez volontairement via :
+          </p>
+          <ul class="list-disc pl-6 mt-4 space-y-2">
+            <li>Les liens de contact par email (votre adresse email et le contenu de votre message).</li>
+          </ul>
+          <p class="mt-4">
+            Nous n'utilisons <strong>aucun cookie tiers de traçage publicitaire</strong> (Google Analytics, Facebook Pixel, etc.).
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="text-2xl font-bold text-nashi-900 mb-4">2. Utilisation des données</h2>
+          <p>
+            Les informations recueillies font l’objet d’un traitement informatique destiné à :
+          </p>
+          <ul class="list-disc pl-6 mt-4 space-y-2">
+            <li>Répondre à vos demandes d'information.</li>
+            <li>Vous tenir informé du lancement de nos services (si vous en faites la demande explicite).</li>
+          </ul>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="text-2xl font-bold text-nashi-900 mb-4">3. Vos droits (RGPD)</h2>
+          <p>
+            Conformément à la loi « informatique et libertés » du 6 janvier 1978 modifiée et au Règlement Général sur la Protection des Données (RGPD), vous bénéficiez d’un droit d’accès, de rectification, de portabilité et d’effacement de vos données ou encore de limitation du traitement.
+          </p>
+          <p class="mt-4">
+            Vous pouvez exercer ces droits en nous contactant à : <strong>contact@nashi.cloud</strong>
+          </p>
+        </section>
+      </div>
+    </div>
+  </main>
+  <Footer />
+</Layout>

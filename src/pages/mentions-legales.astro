@@ -1,0 +1,52 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Mentions Légales | Nashi Cloud">
+  <Header />
+  <main class="pt-32 pb-24">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h1 class="text-4xl font-bold text-nashi-900 mb-12">Mentions Légales</h1>
+      
+      <div class="prose prose-lg prose-nashi text-nashi-900/80">
+        <section class="mb-12">
+          <h2 class="text-2xl font-bold text-nashi-900 mb-4">1. Éditeur du site</h2>
+          <p>
+            Le site <strong>nashi.cloud</strong> est édité par la société <strong>Nashi Cloud</strong>, Société par Actions Simplifiée Unipersonnelle (SASU) en cours d'immatriculation.
+          </p>
+          <ul class="list-disc pl-6 mt-4 space-y-2">
+            <li><strong>Fondateur & Président :</strong> Raphaël Auberlet</li>
+            <li><strong>Siège social :</strong> En cours de domiciliation</li>
+            <li><strong>Email de contact :</strong> contact@nashi.cloud</li>
+            <li><strong>Numéro SIRET :</strong> En cours d'attribution</li>
+            <li><strong>Numéro de TVA Intracommunautaire :</strong> En cours d'attribution</li>
+          </ul>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="text-2xl font-bold text-nashi-900 mb-4">2. Hébergement du site vitrine</h2>
+          <p>
+            Ce site vitrine est actuellement hébergé par :<br/>
+            <strong>GitHub, Inc.</strong><br/>
+            88 Colin P. Kelly Jr. Street<br/>
+            San Francisco, CA 94107<br/>
+            États-Unis
+          </p>
+          <p class="mt-4 text-sm italic">
+            Note : Les services Nashi Cloud (VPS, Mails, Stockage) seront exclusivement hébergés en France sur notre propre infrastructure et celle de nos partenaires français (OVHcloud).
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="text-2xl font-bold text-nashi-900 mb-4">3. Propriété intellectuelle</h2>
+          <p>
+            L'ensemble de ce site relève de la législation française et internationale sur le droit d'auteur et la propriété intellectuelle. Tous les droits de reproduction sont réservés, y compris pour les documents téléchargeables et les représentations iconographiques et photographiques.
+          </p>
+        </section>
+      </div>
+    </div>
+  </main>
+  <Footer />
+</Layout>
