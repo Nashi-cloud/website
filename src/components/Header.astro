@@ -21,9 +21,9 @@
         </a>
       </nav>
 
-      <!-- Mobile Menu Button (Placeholder) -->
+      <!-- Mobile Menu Button -->
       <div class="md:hidden flex items-center">
-        <button class="text-nashi-900 hover:text-nashi-600 focus:outline-none">
+        <button id="mobile-menu-button" class="text-nashi-900 hover:text-nashi-600 focus:outline-none p-2">
           <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
           </svg>
@@ -31,4 +31,35 @@
       </div>
     </div>
   </div>
+
+  <!-- Mobile Menu Panel -->
+  <div id="mobile-menu" class="hidden md:hidden bg-nashi-100 border-b border-nashi-200 absolute w-full left-0 top-20 shadow-lg">
+    <div class="px-4 pt-2 pb-6 space-y-2">
+      <a href="#services" class="block px-3 py-2 rounded-md text-base font-medium text-nashi-900 hover:text-nashi-600 hover:bg-nashi-200 transition-colors">Services</a>
+      <a href="#valeurs" class="block px-3 py-2 rounded-md text-base font-medium text-nashi-900 hover:text-nashi-600 hover:bg-nashi-200 transition-colors">Nos Valeurs</a>
+      <a href="#tarifs" class="block px-3 py-2 rounded-md text-base font-medium text-nashi-900 hover:text-nashi-600 hover:bg-nashi-200 transition-colors">Offres</a>
+      <a href="#contact" class="block px-3 py-2 mt-4 text-center rounded-full bg-nashi-900 text-nashi-100 font-semibold hover:bg-nashi-600 hover:text-white transition-all">
+        Nous Contacter
+      </a>
+    </div>
+  </div>
 </header>
+
+<script>
+  const btn = document.getElementById('mobile-menu-button');
+  const menu = document.getElementById('mobile-menu');
+
+  if (btn && menu) {
+    btn.addEventListener('click', () => {
+      menu.classList.toggle('hidden');
+    });
+
+    // Fermer le menu quand on clique sur un lien
+    const links = menu.querySelectorAll('a');
+    links.forEach(link => {
+      link.addEventListener('click', () => {
+        menu.classList.add('hidden');
+      });
+    });
+  }
+</script>
