@@ -19,6 +19,11 @@ const services = [
     title: "Inférence IA",
     description: "Accédez à la puissance de l'IA générative hébergée localement. Confidentialité maximale pour vos données sensibles.",
     icon: "cpu"
+  },
+  {
+    title: "Automatisation IA",
+    description: "Connectez vos applications et créez des workflows intelligents (type n8n). Automatisez vos tâches répétitives sans coder.",
+    icon: "automation"
   }
 ];
 ---
@@ -32,7 +37,7 @@ const services = [
       </p>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8 justify-center">
       {services.map(service => (
         <div class="bg-white p-8 rounded-2xl shadow-sm border border-nashi-200 hover:shadow-xl hover:border-nashi-400 transition-all duration-300 group">
           <div class="w-14 h-14 bg-nashi-100 rounded-xl flex items-center justify-center mb-6 group-hover:bg-nashi-500 transition-colors duration-300">
@@ -48,6 +53,9 @@ const services = [
             )}
             {service.icon === 'cpu' && (
               <svg class="w-8 h-8 text-nashi-900" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" /></svg>
+            )}
+            {service.icon === 'automation' && (
+              <svg class="w-8 h-8 text-nashi-900" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
             )}
           </div>
           <h3 class="text-xl font-bold text-nashi-900 mb-3">{service.title}</h3>

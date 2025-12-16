@@ -10,43 +10,101 @@ import Footer from '../components/Footer.astro';
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <h1 class="text-4xl font-bold text-nashi-900 mb-12">Conditions Générales de Vente</h1>
       
-      <div class="prose prose-lg prose-nashi text-nashi-900/80">
-        <div class="bg-nashi-100 p-6 rounded-lg border border-nashi-200 mb-8">
-          <p class="font-bold text-nashi-900">Note importante :</p>
-          <p class="mt-2">
-            La société Nashi Cloud étant en cours de création et le service commercial n'étant pas encore ouvert (lancement prévu Janvier 2026), les présentes CGV sont fournies à titre indicatif et seront mises à jour lors du lancement officiel.
+      <div class="prose prose-lg prose-nashi text-nashi-900/80 max-w-none">
+        <div class="bg-nashi-100 p-6 rounded-lg border border-nashi-200 mb-12">
+          <p class="font-bold text-nashi-900">⚠️ Document de travail</p>
+          <p class="mt-2 text-sm">
+            Ces Conditions Générales de Vente (CGV) constituent une base juridique complète destinée à être validée par un professionnel du droit avant le lancement commercial.
           </p>
         </div>
 
-        <section class="mb-12">
-          <h2 class="text-2xl font-bold text-nashi-900 mb-4">1. Objet</h2>
-          <p>
-            Les présentes Conditions Générales de Vente (CGV) ont pour objet de définir les conditions techniques, juridiques et financières dans lesquelles Nashi Cloud s'engage à fournir ses services d'hébergement et de cloud computing au Client.
-          </p>
-        </section>
+        <h3 class="text-xl font-bold text-nashi-900 mt-8 mb-4">ARTICLE 1 - DÉSIGNATION DU PRESTATAIRE</h3>
+        <p>
+            Les présents services sont fournis par la société <strong>Nashi Cloud SASU</strong> (en cours d'immatriculation), ci-après désignée « le Prestataire » ou « Nashi Cloud ».<br/>
+            Siège social : [Adresse à compléter]<br/>
+            Email de contact : contact@nashi.cloud<br/>
+            Hébergeur de l'infrastructure physique : OVH SAS (Roubaix, France).
+        </p>
 
-        <section class="mb-12">
-          <h2 class="text-2xl font-bold text-nashi-900 mb-4">2. Services proposés</h2>
-          <p>
-            Nashi Cloud proposera à son lancement :
-          </p>
-          <ul class="list-disc pl-6 mt-4 space-y-2">
-            <li>Location de Serveurs Privés Virtuels (VPS).</li>
-            <li>Hébergement de messagerie électronique professionnelle.</li>
-            <li>Stockage et partage de fichiers (Cloud).</li>
-            <li>Services d'inférence IA hébergés.</li>
-          </ul>
-        </section>
+        <h3 class="text-xl font-bold text-nashi-900 mt-8 mb-4">ARTICLE 2 - OBJET ET CHAMP D'APPLICATION</h3>
+        <p>
+            Les présentes Conditions Générales de Vente (CGV) ont pour objet de définir les conditions techniques, juridiques et financières dans lesquelles Nashi Cloud s'engage à fournir ses services d'hébergement, de serveurs privés virtuels (VPS) et de solutions cloud (ci-après « les Services ») au client professionnel ou particulier (ci-après « le Client »).
+        </p>
+        <p>
+            Toute commande passée auprès de Nashi Cloud implique l'acceptation sans réserve des présentes CGV, qui prévalent sur tout autre document du Client (notamment ses propres conditions générales d'achat), sauf accord dérogatoire exprès et écrit de Nashi Cloud.
+        </p>
 
-        <section class="mb-12">
-          <h2 class="text-2xl font-bold text-nashi-900 mb-4">3. Obligations de Nashi Cloud</h2>
-          <p>
-            Nashi Cloud s'engage à apporter tout le soin et la diligence nécessaires à la fourniture d'un service de qualité conformément aux usages de la profession et à l'état de l'art. Il s'agit d'une obligation de moyens.
-          </p>
-        </section>
+        <h3 class="text-xl font-bold text-nashi-900 mt-8 mb-4">ARTICLE 3 - DESCRIPTION DES SERVICES</h3>
+        <p>Nashi Cloud fournit des services d'infrastructure hébergés exclusivement en France :</p>
+        <ul class="list-disc pl-6 space-y-2">
+            <li><strong>VPS (Serveur Privé Virtuel) :</strong> Mise à disposition d'une machine virtuelle dédiée avec ressources garanties (vCore, RAM, Stockage).</li>
+            <li><strong>Nashi Mail :</strong> Service de messagerie électronique professionnelle sécurisée.</li>
+            <li><strong>Nashi Drive :</strong> Service de stockage et de partage de fichiers (basé sur Nextcloud).</li>
+            <li><strong>Backup Externalisé :</strong> Service de sauvegarde chiffrée sur un site distant distinct du site de production.</li>
+        </ul>
+
+        <h3 class="text-xl font-bold text-nashi-900 mt-8 mb-4">ARTICLE 4 - COMMANDE ET DURÉE</h3>
+        <p>
+            <strong>4.1. Commande :</strong> Le contrat est formé lors de la validation de la commande en ligne par le Client et du paiement de la première échéance.
+        </p>
+        <p>
+            <strong>4.2. Durée :</strong> Les Services sont souscrits pour une durée indéterminée avec une période d'engagement minimale choisie lors de la commande (mensuelle ou annuelle).
+        </p>
+        <p>
+            <strong>4.3. Renouvellement :</strong> Sauf dénonciation par l'une des parties, le contrat se renouvelle tacitement pour une durée identique à la période initiale.
+        </p>
+
+        <h3 class="text-xl font-bold text-nashi-900 mt-8 mb-4">ARTICLE 5 - CONDITIONS FINANCIÈRES</h3>
+        <p>
+            <strong>5.1. Tarifs :</strong> Les prix sont indiqués en Euros Hors Taxes (HT) pour les professionnels et Toutes Taxes Comprises (TTC) pour les particuliers. Nashi Cloud se réserve le droit de réviser ses tarifs à tout moment, sous réserve d'en informer le Client au moins 30 jours avant l'application du nouveau tarif.
+        </p>
+        <p>
+            <strong>5.2. Modalités de paiement :</strong> Les factures sont payables d'avance (terme à échoir). Le paiement s'effectue par prélèvement automatique (SEPA) ou carte bancaire.
+        </p>
+        <p>
+            <strong>5.3. Retard de paiement :</strong> Tout retard de paiement entraînera de plein droit l'application d'une pénalité égale à trois (3) fois le taux d'intérêt légal en vigueur, ainsi qu'une indemnité forfaitaire pour frais de recouvrement de 40€ (pour les professionnels). En cas de non-paiement sous 7 jours après relance, Nashi Cloud se réserve le droit de suspendre les Services.
+        </p>
+
+        <h3 class="text-xl font-bold text-nashi-900 mt-8 mb-4">ARTICLE 6 - OBLIGATIONS ET RESPONSABILITÉ DE NASHI CLOUD</h3>
+        <p>
+            <strong>6.1. Disponibilité (SLA) :</strong> Nashi Cloud s'engage à une obligation de moyens pour assurer la disponibilité des Services. L'objectif de disponibilité mensuelle est de 99,9%. En cas de non-respect, des pénalités sous forme d'avoirs peuvent être appliquées sur demande, plafonnées au montant mensuel du service impacté.
+        </p>
+        <p>
+            <strong>6.2. Sécurité :</strong> Nashi Cloud met en œuvre les mesures techniques nécessaires pour assurer la sécurité physique et logique de son infrastructure (pare-feu, mises à jour, contrôle d'accès).
+        </p>
+        <p>
+            <strong>6.3. Sauvegardes :</strong> Sauf souscription à l'option "Backup Externalisé", il appartient au Client de réaliser ses propres sauvegardes. Nashi Cloud ne saurait être tenu responsable de la perte de données en l'absence de sauvegarde contractuelle.
+        </p>
+
+        <h3 class="text-xl font-bold text-nashi-900 mt-8 mb-4">ARTICLE 7 - OBLIGATIONS ET RESPONSABILITÉ DU CLIENT</h3>
+        <p>
+            <strong>7.1. Utilisation licite :</strong> Le Client s'engage à utiliser les Services dans le respect des lois et règlements en vigueur. Sont strictement interdits : le spamming, l'hébergement de contenu illégal, les attaques réseaux (DDoS), et toute activité portant atteinte aux droits de tiers.
+        </p>
+        <p>
+            <strong>7.2. Sécurité du compte :</strong> Le Client est seul responsable de la confidentialité de ses identifiants et mots de passe. Toute action effectuée avec ses identifiants est réputée effectuée par lui.
+        </p>
+
+        <h3 class="text-xl font-bold text-nashi-900 mt-8 mb-4">ARTICLE 8 - DONNÉES PERSONNELLES (RGPD)</h3>
+        <p>
+            <strong>8.1. Traitement :</strong> Nashi Cloud agit en tant que sous-traitant au sens du RGPD pour les données hébergées par le Client. Nashi Cloud s'engage à ne traiter ces données que sur instruction du Client et pour les besoins de l'exécution du contrat.
+        </p>
+        <p>
+            <strong>8.2. Localisation :</strong> Nashi Cloud garantit que l'ensemble des données du Client sont hébergées exclusivement sur le territoire français. Aucun transfert de données hors UE n'est réalisé.
+        </p>
+
+        <h3 class="text-xl font-bold text-nashi-900 mt-8 mb-4">ARTICLE 9 - RÉSILIATION</h3>
+        <p>
+            Le Client peut résilier son abonnement à tout moment depuis son espace client. La résiliation prend effet à la fin de la période d'engagement en cours. Aucun remboursement ne sera effectué pour la période non consommée (sauf exercice du droit de rétractation légal de 14 jours pour les consommateurs).
+        </p>
+
+        <h3 class="text-xl font-bold text-nashi-900 mt-8 mb-4">ARTICLE 10 - DROIT APPLICABLE ET JURIDICTION</h3>
+        <p>
+            Les présentes CGV sont régies par le droit français. En cas de litige, et à défaut d'accord amiable, compétence expresse est attribuée aux tribunaux du ressort du siège social de Nashi Cloud, nonobstant pluralité de défendeurs ou appel en garantie.
+        </p>
         
-        <!-- Easter Egg #3 -->
-        <!-- Article 42 : La réponse à la grande question sur la vie, l'univers et le reste est bien 42. -->
+        <div class="mt-12 pt-8 border-t border-nashi-200 text-sm text-nashi-900/60 italic">
+            Dernière mise à jour : 16 Décembre 2025
+        </div>
       </div>
     </div>
   </main>

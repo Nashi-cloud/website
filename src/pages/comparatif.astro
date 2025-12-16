@@ -1,0 +1,340 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Comparatif Cloud & ROI | Nashi Cloud">
+  <Header />
+  
+  <main class="pt-32 pb-24" x-data="roiCalculator()">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Intro -->
+      <div class="text-center mb-12">
+        <h1 class="text-4xl md:text-5xl font-bold text-nashi-900 mb-6">
+          Arrêtez de louer,<br/>
+          <span class="text-nashi-600">Commencez à posséder.</span>
+        </h1>
+        <p class="text-xl text-nashi-900/80 max-w-3xl mx-auto">
+          Comparatif financier et technique entre Nashi Cloud et les géants américains.
+          <br/><span class="font-bold text-nashi-900 mt-2 block">Visualisez vos économies réelles sur 3 ans.</span>
+        </p>
+      </div>
+
+      <!-- Sélecteur d'offre -->
+      <div class="flex justify-center mb-12">
+        <div class="bg-nashi-100 p-1 rounded-xl inline-flex">
+            <button @click="setOffer('starter')" :class="currentOffer === 'starter' ? 'bg-white text-nashi-900 shadow-sm' : 'text-nashi-900/60 hover:text-nashi-900'" class="px-6 py-2 rounded-lg font-bold transition-all">Starter (5 users)</button>
+            <button @click="setOffer('pro')" :class="currentOffer === 'pro' ? 'bg-white text-nashi-900 shadow-sm' : 'text-nashi-900/60 hover:text-nashi-900'" class="px-6 py-2 rounded-lg font-bold transition-all">Pro (15 users)</button>
+            <button @click="setOffer('enterprise')" :class="currentOffer === 'enterprise' ? 'bg-white text-nashi-900 shadow-sm' : 'text-nashi-900/60 hover:text-nashi-900'" class="px-6 py-2 rounded-lg font-bold transition-all">Enterprise (30 users)</button>
+        </div>
+      </div>
+
+      <!-- Graphique ROI -->
+      <div class="bg-white rounded-3xl shadow-xl border border-nashi-200 p-8 mb-20">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+            <div class="lg:col-span-2">
+                <h3 class="text-2xl font-bold text-nashi-900 mb-2">Projection des coûts cumulés (3 ans)</h3>
+                <p class="text-sm text-nashi-900/60 mb-6">
+                    Comparaison à service équivalent (incluant sauvegarde externalisée pour GAFAM).
+                </p>
+                <div class="relative h-80 w-full">
+                    <canvas id="roiChart"></canvas>
+                </div>
+            </div>
+            <div class="flex flex-col justify-center space-y-6">
+                <div class="p-6 bg-nashi-100/50 rounded-xl border border-nashi-200">
+                    <h4 class="font-bold text-nashi-900 mb-2">Le Bilan</h4>
+                    <p class="text-nashi-900/80 text-sm" x-text="getSummaryText()"></p>
+                </div>
+                <div class="space-y-2">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-medium text-blue-600">Microsoft 365 (+ Backup)</span>
+                        <span class="font-bold text-blue-600" x-text="formatPrice(getData().msTotal)"></span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-medium text-red-500">Google Workspace (+ Backup)</span>
+                        <span class="font-bold text-red-500" x-text="formatPrice(getData().googleTotal)"></span>
+                    </div>
+                    <div class="flex justify-between items-center border-t border-nashi-200 pt-2">
+                        <span class="text-sm font-medium text-nashi-900">Nashi Cloud</span>
+                        <span class="font-bold text-nashi-600" x-text="formatPrice(getData().nashiTotal)"></span>
+                    </div>
+                    <div class="bg-green-50 p-3 rounded-lg mt-2 flex justify-between items-center">
+                        <span class="font-bold text-nashi-900 text-sm">Économie vs GAFAM</span>
+                        <span class="font-bold text-green-600 text-lg" x-text="formatPrice(getData().savings)"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+
+      <!-- Tableau Comparatif -->
+      <div class="overflow-hidden rounded-2xl border border-nashi-200 shadow-lg bg-white mb-20">
+        <table class="w-full text-left border-collapse">
+            <thead>
+                <tr class="bg-nashi-900 text-nashi-100">
+                    <th class="p-6 text-lg font-bold">Critères</th>
+                    <th class="p-6 text-lg font-bold bg-nashi-600 text-white w-1/3">Nashi Cloud</th>
+                    <th class="p-6 text-lg font-bold w-1/3 text-gray-400">Microsoft 365 / Google</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-nashi-100">
+                <tr class="hover:bg-nashi-50 transition-colors">
+                    <td class="p-6 font-medium text-nashi-900">Souveraineté des données</td>
+                    <td class="p-6 text-nashi-900 font-bold bg-nashi-50/50">✅ 100% France (Hébergé OVH)</td>
+                    <td class="p-6 text-gray-600">❌ US (Soumis au Cloud Act)</td>
+                </tr>
+                <tr class="hover:bg-nashi-50 transition-colors">
+                    <td class="p-6 font-medium text-nashi-900">Confidentialité (Privacy)</td>
+                    <td class="p-6 text-nashi-900 font-bold bg-nashi-50/50">✅ Pas de scan publicitaire/IA</td>
+                    <td class="p-6 text-gray-600">⚠️ Analyse des données possible</td>
+                </tr>
+                <tr class="hover:bg-nashi-50 transition-colors">
+                    <td class="p-6 font-medium text-nashi-900">Modèle de Prix</td>
+                    <td class="p-6 text-nashi-900 font-bold bg-nashi-50/50">✅ Forfait VPS fixe (Utilisateurs illimités*)</td>
+                    <td class="p-6 text-gray-600">❌ Prix par utilisateur / mois</td>
+                </tr>
+                <tr class="hover:bg-nashi-50 transition-colors">
+                    <td class="p-6 font-medium text-nashi-900">Support Technique</td>
+                    <td class="p-6 text-nashi-900 font-bold bg-nashi-50/50">✅ Humain, Dédié & Français</td>
+                    <td class="p-6 text-gray-600">❌ Tickets, Bots & Délocalisé</td>
+                </tr>
+                <tr class="hover:bg-nashi-50 transition-colors">
+                    <td class="p-6 font-medium text-nashi-900">Architecture</td>
+                    <td class="p-6 text-nashi-900 font-bold bg-nashi-50/50">✅ Isolée (VPS Dédié par client)</td>
+                    <td class="p-6 text-gray-600">⚠️ Mutualisée (Multi-tenant)</td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="p-4 text-xs text-nashi-900/50 bg-nashi-50 text-center">
+            * Dans la limite des ressources du VPS alloué (Stockage/RAM).
+        </p>
+      </div>
+
+      <!-- CTA -->
+      <div class="text-center bg-nashi-900 rounded-3xl p-12 relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-64 h-64 bg-nashi-600 rounded-full blur-3xl opacity-20 -mr-16 -mt-16"></div>
+        <div class="relative z-10">
+            <h2 class="text-3xl font-bold text-white mb-6">Convaincu par les chiffres ?</h2>
+            <p class="text-nashi-100/80 text-lg mb-8 max-w-2xl mx-auto">
+                Rejoignez les entreprises qui ont choisi l'indépendance numérique sans sacrifier leur trésorerie.
+            </p>
+            <a href="/#contact" class="inline-block px-8 py-4 rounded-full bg-nashi-500 text-nashi-900 font-bold text-lg hover:bg-white transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+                Demander mon installation
+            </a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+  <Footer />
+</Layout>
+
+<script is:inline src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script is:inline src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0"></script>
+
+<script is:inline>
+  document.addEventListener('alpine:init', () => {
+    Alpine.data('roiCalculator', () => {
+        let chartInstance = null;
+
+        return {
+            currentOffer: 'pro',
+            
+            // Données de base
+            offers: {
+                starter: { name: 'Starter', users: 5, annualPrice: 348 },
+                pro: { name: 'Pro', users: 15, annualPrice: 708 },
+                enterprise: { name: 'Enterprise', users: 30, annualPrice: 1308 }
+            },
+            setupFee: 420,
+            
+            // Prix du marché (Business Standard - Engagement Annuel)
+            msMonthlyPerUser: 11.70, 
+            googleMonthlyPerUser: 11.50,
+            // Coût moyen d'une solution de backup cloud-to-cloud (ex: Veeam, Acronis)
+            // Indispensable pour égaler le service "Backup Externalisé" de Nashi
+            backupMonthlyPerUser: 3.50,
+
+            init() {
+                const urlParams = new URLSearchParams(window.location.search);
+                const offerParam = urlParams.get('offer');
+                if (offerParam && this.offers[offerParam]) {
+                    this.currentOffer = offerParam;
+                }
+                
+                setTimeout(() => {
+                    this.initChart();
+                }, 100);
+            },
+
+            setOffer(offerKey) {
+                this.currentOffer = offerKey;
+                this.updateChart();
+            },
+
+            getData() {
+                const offer = this.offers[this.currentOffer];
+                
+                // --- Calculs Nashi ---
+                const nashiY1 = this.setupFee + offer.annualPrice;
+                const nashiY2 = this.setupFee + (offer.annualPrice * 2);
+                const nashiY3 = this.setupFee + (offer.annualPrice * 3);
+
+                // --- Calculs Microsoft 365 (+ Backup) ---
+                const msMonthlyTotal = this.msMonthlyPerUser + this.backupMonthlyPerUser;
+                const msAnnual = offer.users * msMonthlyTotal * 12;
+                const msY1 = msAnnual;
+                const msY2 = msAnnual * 2;
+                const msY3 = msAnnual * 3;
+
+                // --- Calculs Google Workspace (+ Backup) ---
+                const googleMonthlyTotal = this.googleMonthlyPerUser + this.backupMonthlyPerUser;
+                const googleAnnual = offer.users * googleMonthlyTotal * 12;
+                const googleY1 = googleAnnual;
+                const googleY2 = googleAnnual * 2;
+                const googleY3 = googleAnnual * 3;
+
+                return {
+                    nashi: [this.setupFee, nashiY1, nashiY2, nashiY3],
+                    ms: [0, msY1, msY2, msY3],
+                    google: [0, googleY1, googleY2, googleY3],
+                    
+                    nashiTotal: nashiY3,
+                    msTotal: msY3,
+                    googleTotal: googleY3,
+                    // On compare par rapport à la moyenne ou au moins cher des deux (ici identiques)
+                    savings: msY3 - nashiY3
+                };
+            },
+
+            getSummaryText() {
+                const data = this.getData();
+                if (this.currentOffer === 'starter') {
+                    return "Même pour une petite structure (5 utilisateurs), l'investissement initial est rentabilisé dès la première année. Sur 3 ans, vous économisez plus de 1 200€ face aux solutions US (avec backup).";
+                } else if (this.currentOffer === 'pro') {
+                    return "C'est l'offre la plus rentable. L'investissement initial est amorti très rapidement. Sur 3 ans, vous économisez plus de 5 500€ par rapport aux licences GAFAM équivalentes.";
+                } else {
+                    return "Pour 30 utilisateurs, l'économie est spectaculaire. Vous économisez près de 12 000€ sur 3 ans, tout en bénéficiant d'une infrastructure dédiée et souveraine.";
+                }
+            },
+
+            formatPrice(value) {
+                return new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(value);
+            },
+
+            initChart() {
+                const ctx = document.getElementById('roiChart');
+                if (!ctx) return;
+                
+                if (typeof ChartDataLabels !== 'undefined') {
+                    Chart.register(ChartDataLabels);
+                }
+                
+                const data = this.getData();
+
+                if (chartInstance) {
+                    chartInstance.destroy();
+                }
+
+                chartInstance = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Démarrage', 'Année 1', 'Année 2', 'Année 3'],
+                        datasets: [
+                            {
+                                label: 'Nashi Cloud',
+                                data: data.nashi,
+                                borderColor: '#d8a82a',
+                                backgroundColor: '#d8a82a',
+                                borderWidth: 4,
+                                tension: 0.3,
+                                datalabels: {
+                                    align: 'top',
+                                    anchor: 'end',
+                                    color: '#d8a82a',
+                                    font: { weight: 'bold', size: 13 },
+                                    formatter: (value) => Math.round(value) + ' €'
+                                }
+                            },
+                            {
+                                label: 'Microsoft 365 + Backup',
+                                data: data.ms,
+                                borderColor: '#00a4ef', // Bleu Microsoft
+                                backgroundColor: '#00a4ef',
+                                borderWidth: 2,
+                                borderDash: [5, 5],
+                                tension: 0.3,
+                                pointStyle: 'rectRot',
+                                pointRadius: 6,
+                                datalabels: {
+                                    align: 'bottom',
+                                    anchor: 'start',
+                                    color: '#00a4ef',
+                                    font: { weight: 'bold' },
+                                    formatter: (value) => value > 0 ? Math.round(value) + ' €' : ''
+                                }
+                            },
+                            {
+                                label: 'Google Workspace + Backup',
+                                data: data.google,
+                                borderColor: '#ea4335', // Rouge Google
+                                backgroundColor: '#ea4335',
+                                borderWidth: 2,
+                                borderDash: [2, 2],
+                                tension: 0.3,
+                                pointStyle: 'triangle',
+                                pointRadius: 6,
+                                datalabels: {
+                                    align: 'right',
+                                    anchor: 'center',
+                                    color: '#ea4335',
+                                    font: { weight: 'bold' },
+                                    formatter: (value) => value > 0 ? Math.round(value) + ' €' : ''
+                                }
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        layout: {
+                            padding: { top: 30, bottom: 20, left: 10, right: 10 }
+                        },
+                        plugins: {
+                            legend: { position: 'bottom', labels: { usePointStyle: true, padding: 20 } },
+                            tooltip: { enabled: true, mode: 'index', intersect: false },
+                            datalabels: {
+                                display: true,
+                                backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                                borderRadius: 4,
+                                padding: 4
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                grid: { color: '#f3f4f6' },
+                                ticks: { callback: function(value) { return value + ' €'; } }
+                            },
+                            x: { grid: { display: false } }
+                        }
+                    }
+                });
+            },
+
+            updateChart() {
+                if (!chartInstance) return;
+                const data = this.getData();
+                chartInstance.data.datasets[0].data = data.nashi;
+                chartInstance.data.datasets[1].data = data.ms;
+                chartInstance.data.datasets[2].data = data.google;
+                chartInstance.update();
+            }
+        };
+    });
+  });
+</script>
+<script is:inline src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
