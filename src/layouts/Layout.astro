@@ -4,7 +4,7 @@ interface Props {
 	description?: string;
 }
 
-const { title, description = "Nashi Cloud - Cloud Souverain et Hébergement Web Français" } = Astro.props;
+const { title, description = "Découvrez Nashi Cloud : Hébergement web souverain, privé et sécurisé en France. Solutions cloud performantes pour PME et particuliers, respectueuses de vos données." } = Astro.props;
 ---
 
 <!doctype html>
@@ -13,7 +13,9 @@ const { title, description = "Nashi Cloud - Cloud Souverain et Hébergement Web 
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="apple-touch-icon" href="/img/nashi_logo_01_square.svg" />
 		<meta name="generator" content={Astro.generator} />
+		<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://unpkg.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:;" />
 		
 		<!-- SEO Principal -->
 		<title>{title}</title>
