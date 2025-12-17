@@ -187,210 +187,210 @@ const comparisonData = [
     </div>
   </main>
   <Footer />
-</Layout>
 
-<script is:inline src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-<script is:inline src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0"></script>
+  <script is:inline src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script is:inline src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0"></script>
 
-<script is:inline>
-  document.addEventListener('alpine:init', () => {
-    Alpine.data('roiCalculator', () => {
-        let chartInstance = null;
+  <script is:inline>
+    document.addEventListener('alpine:init', () => {
+      Alpine.data('roiCalculator', () => {
+          let chartInstance = null;
 
-        return {
-            currentOffer: 'pro',
-            
-            // Données de base
-            offers: {
-                starter: { name: 'Starter', users: 5, annualPrice: 348 },
-                pro: { name: 'Pro', users: 15, annualPrice: 708 },
-                enterprise: { name: 'Enterprise', users: 30, annualPrice: 1308 }
-            },
-            setupFee: 420,
-            
-            // Prix du marché (Business Standard - Engagement Annuel)
-            msMonthlyPerUser: 11.70, 
-            googleMonthlyPerUser: 11.50,
-            // Coût moyen d'une solution de backup cloud-to-cloud (ex: Veeam, Acronis)
-            // Indispensable pour égaler le service "Backup Externalisé" de Nashi
-            backupMonthlyPerUser: 3.50,
+          return {
+              currentOffer: 'pro',
+              
+              // Données de base
+              offers: {
+                  starter: { name: 'Starter', users: 5, annualPrice: 348 },
+                  pro: { name: 'Pro', users: 15, annualPrice: 708 },
+                  enterprise: { name: 'Enterprise', users: 30, annualPrice: 1308 }
+              },
+              setupFee: 420,
+              
+              // Prix du marché (Business Standard - Engagement Annuel)
+              msMonthlyPerUser: 11.70, 
+              googleMonthlyPerUser: 11.50,
+              // Coût moyen d'une solution de backup cloud-to-cloud (ex: Veeam, Acronis)
+              // Indispensable pour égaler le service "Backup Externalisé" de Nashi
+              backupMonthlyPerUser: 3.50,
 
-            init() {
-                const urlParams = new URLSearchParams(window.location.search);
-                const offerParam = urlParams.get('offer');
-                if (offerParam && this.offers[offerParam]) {
-                    this.currentOffer = offerParam;
-                }
-                
-                setTimeout(() => {
-                    this.initChart();
-                }, 100);
-            },
+              init() {
+                  const urlParams = new URLSearchParams(window.location.search);
+                  const offerParam = urlParams.get('offer');
+                  if (offerParam && this.offers[offerParam]) {
+                      this.currentOffer = offerParam;
+                  }
+                  
+                  setTimeout(() => {
+                      this.initChart();
+                  }, 100);
+              },
 
-            setOffer(offerKey) {
-                this.currentOffer = offerKey;
-                this.updateChart();
-            },
+              setOffer(offerKey) {
+                  this.currentOffer = offerKey;
+                  this.updateChart();
+              },
 
-            getData() {
-                const offer = this.offers[this.currentOffer];
-                
-                // --- Calculs Nashi ---
-                const nashiY1 = this.setupFee + offer.annualPrice;
-                const nashiY2 = this.setupFee + (offer.annualPrice * 2);
-                const nashiY3 = this.setupFee + (offer.annualPrice * 3);
+              getData() {
+                  const offer = this.offers[this.currentOffer];
+                  
+                  // --- Calculs Nashi ---
+                  const nashiY1 = this.setupFee + offer.annualPrice;
+                  const nashiY2 = this.setupFee + (offer.annualPrice * 2);
+                  const nashiY3 = this.setupFee + (offer.annualPrice * 3);
 
-                // --- Calculs Microsoft 365 (+ Backup) ---
-                const msMonthlyTotal = this.msMonthlyPerUser + this.backupMonthlyPerUser;
-                const msAnnual = offer.users * msMonthlyTotal * 12;
-                const msY1 = msAnnual;
-                const msY2 = msAnnual * 2;
-                const msY3 = msAnnual * 3;
+                  // --- Calculs Microsoft 365 (+ Backup) ---
+                  const msMonthlyTotal = this.msMonthlyPerUser + this.backupMonthlyPerUser;
+                  const msAnnual = offer.users * msMonthlyTotal * 12;
+                  const msY1 = msAnnual;
+                  const msY2 = msAnnual * 2;
+                  const msY3 = msAnnual * 3;
 
-                // --- Calculs Google Workspace (+ Backup) ---
-                const googleMonthlyTotal = this.googleMonthlyPerUser + this.backupMonthlyPerUser;
-                const googleAnnual = offer.users * googleMonthlyTotal * 12;
-                const googleY1 = googleAnnual;
-                const googleY2 = googleAnnual * 2;
-                const googleY3 = googleAnnual * 3;
+                  // --- Calculs Google Workspace (+ Backup) ---
+                  const googleMonthlyTotal = this.googleMonthlyPerUser + this.backupMonthlyPerUser;
+                  const googleAnnual = offer.users * googleMonthlyTotal * 12;
+                  const googleY1 = googleAnnual;
+                  const googleY2 = googleAnnual * 2;
+                  const googleY3 = googleAnnual * 3;
 
-                return {
-                    nashi: [this.setupFee, nashiY1, nashiY2, nashiY3],
-                    ms: [0, msY1, msY2, msY3],
-                    google: [0, googleY1, googleY2, googleY3],
-                    
-                    nashiTotal: nashiY3,
-                    msTotal: msY3,
-                    googleTotal: googleY3,
-                    // On compare par rapport à la moyenne ou au moins cher des deux (ici identiques)
-                    savings: msY3 - nashiY3
-                };
-            },
+                  return {
+                      nashi: [this.setupFee, nashiY1, nashiY2, nashiY3],
+                      ms: [0, msY1, msY2, msY3],
+                      google: [0, googleY1, googleY2, googleY3],
+                      
+                      nashiTotal: nashiY3,
+                      msTotal: msY3,
+                      googleTotal: googleY3,
+                      // On compare par rapport à la moyenne ou au moins cher des deux (ici identiques)
+                      savings: msY3 - nashiY3
+                  };
+              },
 
-            getSummaryText() {
-                const data = this.getData();
-                if (this.currentOffer === 'starter') {
-                    return "Même pour une petite structure (5 utilisateurs), l'investissement initial est rentabilisé dès la première année. Sur 3 ans, vous économisez plus de 1 200€ face aux solutions US (avec backup).";
-                } else if (this.currentOffer === 'pro') {
-                    return "C'est l'offre la plus rentable. L'investissement initial est amorti très rapidement. Sur 3 ans, vous économisez plus de 5 500€ par rapport aux licences GAFAM équivalentes.";
-                } else {
-                    return "Pour 30 utilisateurs, l'économie est spectaculaire. Vous économisez près de 12 000€ sur 3 ans, tout en bénéficiant d'une infrastructure dédiée et souveraine.";
-                }
-            },
+              getSummaryText() {
+                  const data = this.getData();
+                  if (this.currentOffer === 'starter') {
+                      return "Même pour une petite structure (5 utilisateurs), l'investissement initial est rentabilisé dès la première année. Sur 3 ans, vous économisez plus de 1 200€ face aux solutions US (avec backup).";
+                  } else if (this.currentOffer === 'pro') {
+                      return "C'est l'offre la plus rentable. L'investissement initial est amorti très rapidement. Sur 3 ans, vous économisez plus de 5 500€ par rapport aux licences GAFAM équivalentes.";
+                  } else {
+                      return "Pour 30 utilisateurs, l'économie est spectaculaire. Vous économisez près de 12 000€ sur 3 ans, tout en bénéficiant d'une infrastructure dédiée et souveraine.";
+                  }
+              },
 
-            formatPrice(value) {
-                return new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(value);
-            },
+              formatPrice(value) {
+                  return new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(value);
+              },
 
-            initChart() {
-                const ctx = document.getElementById('roiChart');
-                if (!ctx) return;
-                
-                if (typeof ChartDataLabels !== 'undefined') {
-                    Chart.register(ChartDataLabels);
-                }
-                
-                const data = this.getData();
+              initChart() {
+                  const ctx = document.getElementById('roiChart');
+                  if (!ctx) return;
+                  
+                  if (typeof ChartDataLabels !== 'undefined') {
+                      Chart.register(ChartDataLabels);
+                  }
+                  
+                  const data = this.getData();
 
-                if (chartInstance) {
-                    chartInstance.destroy();
-                }
+                  if (chartInstance) {
+                      chartInstance.destroy();
+                  }
 
-                chartInstance = new Chart(ctx, {
-                    type: 'line',
-                    data: {
-                        labels: ['Démarrage', 'Année 1', 'Année 2', 'Année 3'],
-                        datasets: [
-                            {
-                                label: 'Nashi Cloud',
-                                data: data.nashi,
-                                borderColor: '#d8a82a',
-                                backgroundColor: '#d8a82a',
-                                borderWidth: 4,
-                                tension: 0.3,
-                                datalabels: {
-                                    align: 'top',
-                                    anchor: 'end',
-                                    color: '#d8a82a',
-                                    font: { weight: 'bold', size: 13 },
-                                    formatter: (value) => Math.round(value) + ' €'
-                                }
-                            },
-                            {
-                                label: 'Microsoft 365 + Backup',
-                                data: data.ms,
-                                borderColor: '#00a4ef', // Bleu Microsoft
-                                backgroundColor: '#00a4ef',
-                                borderWidth: 2,
-                                borderDash: [5, 5],
-                                tension: 0.3,
-                                pointStyle: 'rectRot',
-                                pointRadius: 6,
-                                datalabels: {
-                                    align: 'bottom',
-                                    anchor: 'start',
-                                    color: '#00a4ef',
-                                    font: { weight: 'bold' },
-                                    formatter: (value) => value > 0 ? Math.round(value) + ' €' : ''
-                                }
-                            },
-                            {
-                                label: 'Google Workspace + Backup',
-                                data: data.google,
-                                borderColor: '#ea4335', // Rouge Google
-                                backgroundColor: '#ea4335',
-                                borderWidth: 2,
-                                borderDash: [2, 2],
-                                tension: 0.3,
-                                pointStyle: 'triangle',
-                                pointRadius: 6,
-                                datalabels: {
-                                    align: 'right',
-                                    anchor: 'center',
-                                    color: '#ea4335',
-                                    font: { weight: 'bold' },
-                                    formatter: (value) => value > 0 ? Math.round(value) + ' €' : ''
-                                }
-                            }
-                        ]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        layout: {
-                            padding: { top: 30, bottom: 20, left: 10, right: 10 }
-                        },
-                        plugins: {
-                            legend: { position: 'bottom', labels: { usePointStyle: true, padding: 20 } },
-                            tooltip: { enabled: true, mode: 'index', intersect: false },
-                            datalabels: {
-                                display: true,
-                                backgroundColor: 'rgba(255, 255, 255, 0.9)',
-                                borderRadius: 4,
-                                padding: 4
-                            }
-                        },
-                        scales: {
-                            y: {
-                                beginAtZero: true,
-                                grid: { color: '#f3f4f6' },
-                                ticks: { callback: function(value) { return value + ' €'; } }
-                            },
-                            x: { grid: { display: false } }
-                        }
-                    }
-                });
-            },
+                  chartInstance = new Chart(ctx, {
+                      type: 'line',
+                      data: {
+                          labels: ['Démarrage', 'Année 1', 'Année 2', 'Année 3'],
+                          datasets: [
+                              {
+                                  label: 'Nashi Cloud',
+                                  data: data.nashi,
+                                  borderColor: '#d8a82a',
+                                  backgroundColor: '#d8a82a',
+                                  borderWidth: 4,
+                                  tension: 0.3,
+                                  datalabels: {
+                                      align: 'top',
+                                      anchor: 'end',
+                                      color: '#d8a82a',
+                                      font: { weight: 'bold', size: 13 },
+                                      formatter: (value) => Math.round(value) + ' €'
+                                  }
+                              },
+                              {
+                                  label: 'Microsoft 365 + Backup',
+                                  data: data.ms,
+                                  borderColor: '#00a4ef', // Bleu Microsoft
+                                  backgroundColor: '#00a4ef',
+                                  borderWidth: 2,
+                                  borderDash: [5, 5],
+                                  tension: 0.3,
+                                  pointStyle: 'rectRot',
+                                  pointRadius: 6,
+                                  datalabels: {
+                                      align: 'bottom',
+                                      anchor: 'start',
+                                      color: '#00a4ef',
+                                      font: { weight: 'bold' },
+                                      formatter: (value) => value > 0 ? Math.round(value) + ' €' : ''
+                                  }
+                              },
+                              {
+                                  label: 'Google Workspace + Backup',
+                                  data: data.google,
+                                  borderColor: '#ea4335', // Rouge Google
+                                  backgroundColor: '#ea4335',
+                                  borderWidth: 2,
+                                  borderDash: [2, 2],
+                                  tension: 0.3,
+                                  pointStyle: 'triangle',
+                                  pointRadius: 6,
+                                  datalabels: {
+                                      align: 'right',
+                                      anchor: 'center',
+                                      color: '#ea4335',
+                                      font: { weight: 'bold' },
+                                      formatter: (value) => value > 0 ? Math.round(value) + ' €' : ''
+                                  }
+                              }
+                          ]
+                      },
+                      options: {
+                          responsive: true,
+                          maintainAspectRatio: false,
+                          layout: {
+                              padding: { top: 30, bottom: 20, left: 10, right: 10 }
+                          },
+                          plugins: {
+                              legend: { position: 'bottom', labels: { usePointStyle: true, padding: 20 } },
+                              tooltip: { enabled: true, mode: 'index', intersect: false },
+                              datalabels: {
+                                  display: true,
+                                  backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                                  borderRadius: 4,
+                                  padding: 4
+                              }
+                          },
+                          scales: {
+                              y: {
+                                  beginAtZero: true,
+                                  grid: { color: '#f3f4f6' },
+                                  ticks: { callback: function(value) { return value + ' €'; } }
+                              },
+                              x: { grid: { display: false } }
+                          }
+                      }
+                  });
+              },
 
-            updateChart() {
-                if (!chartInstance) return;
-                const data = this.getData();
-                chartInstance.data.datasets[0].data = data.nashi;
-                chartInstance.data.datasets[1].data = data.ms;
-                chartInstance.data.datasets[2].data = data.google;
-                chartInstance.update();
-            }
-        };
+              updateChart() {
+                  if (!chartInstance) return;
+                  const data = this.getData();
+                  chartInstance.data.datasets[0].data = data.nashi;
+                  chartInstance.data.datasets[1].data = data.ms;
+                  chartInstance.data.datasets[2].data = data.google;
+                  chartInstance.update();
+              }
+          };
+      });
     });
-  });
-</script>
+  </script>
+</Layout>
