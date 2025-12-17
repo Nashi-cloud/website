@@ -40,7 +40,7 @@ Une suite bureautique complète, hébergée sur votre propre serveur privé :
 
 Pourquoi payer des licences par utilisateur quand vous pouvez louer votre propre infrastructure ?
 
-| Critère | Nashi Cloud 🍏 | GAFAM (Google/Microsoft) 🇺🇸 |
+| Critère | Nashi Cloud <img src="public/favicon.svg" width="20" /> | GAFAM (Google/Microsoft) 🇺🇸 |
 | :--- | :--- | :--- |
 | **Modèle Économique** | **Forfait Fixe (VPS)** | Prix par utilisateur / mois |
 | **Coût pour 15 utilisateurs** | **708 € / an** | ~ 2 700 € / an |
