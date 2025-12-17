@@ -143,9 +143,15 @@ const offers = [
           </ul>
 
           <div class="text-center mt-auto">
-            <a href={`/comparatif?offer=${offer.name.toLowerCase()}`} class={`inline-block w-full py-2.5 px-4 rounded-xl font-bold text-sm transition-all ${offer.highlight ? 'bg-nashi-600 text-white hover:bg-nashi-900 shadow-md hover:shadow-lg' : 'bg-nashi-100 text-nashi-900 hover:bg-nashi-200'}`}>
-              {offer.maxUsers ? 'Comparer & Choisir' : 'Demander un devis'}
-            </a>
+            {offer.maxUsers ? (
+              <a href={`/comparatif?offer=${offer.name.toLowerCase()}`} class={`inline-block w-full py-2.5 px-4 rounded-xl font-bold text-sm transition-all ${offer.highlight ? 'bg-nashi-600 text-white hover:bg-nashi-900 shadow-md hover:shadow-lg' : 'bg-nashi-100 text-nashi-900 hover:bg-nashi-200'}`}>
+                Comparer & Choisir
+              </a>
+            ) : (
+              <button @click="$dispatch('open-contact-modal', { offer: 'Sur Mesure' })" class="inline-block w-full py-2.5 px-4 rounded-xl font-bold text-sm transition-all bg-nashi-100 text-nashi-900 hover:bg-nashi-200">
+                Demander un devis
+              </button>
+            )}
           </div>
         </div>
       ))}

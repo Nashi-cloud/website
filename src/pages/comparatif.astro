@@ -178,9 +178,9 @@ const comparisonData = [
             <p class="text-nashi-100/80 text-lg mb-8 max-w-2xl mx-auto">
                 Rejoignez les entreprises qui ont choisi l'indépendance numérique sans sacrifier leur trésorerie.
             </p>
-            <a href="/#contact" class="inline-block px-8 py-4 rounded-full bg-nashi-500 text-nashi-900 font-bold text-lg hover:bg-white transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+            <button @click="$dispatch('open-contact-modal', { offer: currentOffer })" class="inline-block px-8 py-4 rounded-full bg-nashi-500 text-nashi-900 font-bold text-lg hover:bg-white transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1">
                 Demander mon installation
-            </a>
+            </button>
         </div>
       </div>
 
@@ -394,4 +394,3 @@ const comparisonData = [
     });
   });
 </script>
-<script is:inline src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>

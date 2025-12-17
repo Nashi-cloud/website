@@ -23,9 +23,9 @@ import Footer from '../components/Footer.astro';
 				<p class="text-lg text-nashi-900/70 mb-8">
 					Le lancement est prévu pour Janvier 2026. Contactez-nous dès maintenant pour réserver votre infrastructure ou en savoir plus sur nos offres de lancement.
 				</p>
-				<a href="mailto:contact@nashi.cloud" class="inline-block px-8 py-4 rounded-full bg-nashi-600 text-white font-bold text-lg hover:bg-nashi-900 transition-all shadow-lg hover:shadow-xl">
+				<button @click="$dispatch('open-contact-modal')" class="inline-block px-8 py-4 rounded-full bg-nashi-600 text-white font-bold text-lg hover:bg-nashi-900 transition-all shadow-lg hover:shadow-xl">
 					Nous contacter
-				</a>
+				</button>
 			</div>
 		</section>
 	</main>
