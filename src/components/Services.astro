@@ -1,28 +1,23 @@
 ---
 const services = [
   {
-    title: "VPS Dédié",
-    description: "Chaque client dispose de son propre serveur privé virtuel. Isolation totale, performance garantie et liberté de configuration.",
-    icon: "server"
-  },
-  {
-    title: "Cloud & Fichiers",
-    description: "Hébergement de fichiers d'entreprise sécurisé. Partagez, collaborez et synchronisez vos données en toute souveraineté.",
+    title: "Nashi Drive",
+    description: "Alternative souveraine à Drive/OneDrive. Stockez, partagez et synchronisez vos fichiers en toute sécurité.",
     icon: "cloud"
   },
   {
-    title: "Serveur Mail Pro",
-    description: "Une messagerie professionnelle complète, hébergée en France, respectueuse de votre vie privée et de celle de vos collaborateurs.",
+    title: "Nashi Mail",
+    description: "Messagerie professionnelle complète (Webmail, IMAP, SMTP). Vos échanges restent privés, sans analyse publicitaire.",
     icon: "mail"
   },
   {
-    title: "Inférence IA",
-    description: "Accédez à la puissance de l'IA générative hébergée localement. Confidentialité maximale pour vos données sensibles.",
-    icon: "cpu"
+    title: "Nashi Visio",
+    description: "Visioconférence illimitée, sécurisée et fluide. Partage d'écran et chat intégrés, sans installation requise.",
+    icon: "video"
   },
   {
-    title: "Automatisation IA",
-    description: "Connectez vos applications et créez des workflows intelligents (type n8n). Automatisez vos tâches répétitives sans coder.",
+    title: "Nashi Automate",
+    description: "Connectez vos applications (type n8n). Créez des workflows intelligents pour automatiser vos tâches répétitives.",
     icon: "automation"
   }
 ];
@@ -37,22 +32,19 @@ const services = [
       </p>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8 justify-center">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 justify-center">
       {services.map(service => (
         <div class="bg-white p-8 rounded-2xl shadow-sm border border-nashi-200 hover:shadow-xl hover:border-nashi-400 transition-all duration-300 group">
           <div class="w-14 h-14 bg-nashi-100 rounded-xl flex items-center justify-center mb-6 group-hover:bg-nashi-500 transition-colors duration-300">
             {/* Simple SVG Icons based on service type */}
-            {service.icon === 'server' && (
-              <svg class="w-8 h-8 text-nashi-900" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" /></svg>
-            )}
             {service.icon === 'cloud' && (
               <svg class="w-8 h-8 text-nashi-900" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" /></svg>
             )}
             {service.icon === 'mail' && (
               <svg class="w-8 h-8 text-nashi-900" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
             )}
-            {service.icon === 'cpu' && (
-              <svg class="w-8 h-8 text-nashi-900" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" /></svg>
+            {service.icon === 'video' && (
+              <svg class="w-8 h-8 text-nashi-900" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
             )}
             {service.icon === 'automation' && (
               <svg class="w-8 h-8 text-nashi-900" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
