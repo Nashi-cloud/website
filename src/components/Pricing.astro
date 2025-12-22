@@ -111,27 +111,39 @@ const offers = [
             <h3 class="text-xl font-bold text-nashi-900">{offer.name}</h3>
             <p class="text-nashi-600 text-sm font-medium mt-1">{offer.target}</p>
             
-            <!-- Prix Annuel -->
-            <div class="mt-4 flex items-baseline justify-center gap-1 h-12" x-show="annual" x-transition>
-              <span class="text-3xl font-extrabold text-nashi-900">{offer.price}</span>
-              {offer.maxUsers && <span class="text-nashi-900 text-xl font-bold">€</span>}
-              {offer.maxUsers && <span class="text-nashi-900/60 text-sm">HT / an</span>}
-            </div>
+            <!-- Prix avec Animation -->
+            <div class="mt-4 relative h-20 w-full overflow-hidden">
+              <!-- Prix Annuel -->
+              <div 
+                class="absolute inset-0 flex flex-col items-center justify-center transition-all duration-500 ease-out"
+                :class="annual ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8 pointer-events-none'"
+              >
+                <div class="flex items-baseline gap-1">
+                  <span class="text-3xl font-extrabold text-nashi-900">{offer.price}</span>
+                  {offer.maxUsers && <span class="text-nashi-900 text-xl font-bold">€</span>}
+                </div>
+                {offer.maxUsers && <span class="text-nashi-900/60 text-sm">HT / an</span>}
+              </div>
 
-            <!-- Prix Mensuel par Boîte (Calculé) -->
-            <div class="mt-4 flex items-baseline justify-center gap-1 h-12" x-show="!annual" x-transition style="display: none;">
+              <!-- Prix Mensuel par Boîte (Calculé) -->
+              <div 
+                class="absolute inset-0 flex flex-col items-center justify-center transition-all duration-500 ease-out"
+                :class="!annual ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-8 pointer-events-none'"
+              >
                 {offer.maxUsers ? (
                     <>
-                        <span class="text-3xl font-extrabold text-nashi-900">
-                          {/* Calcul dynamique : (Prix Annuel / 12 / MaxUsers) arrondi à 2 décimales */}
-                          {(parseFloat(offer.price.replace(/\s/g, '').replace(',', '.')) / 12 / offer.maxUsers).toFixed(2).replace('.', ',')}
-                        </span>
-                        <span class="text-nashi-900 text-xl font-bold">€</span>
-                        <span class="text-nashi-900/60 text-xs text-left leading-tight">HT / mois<br/>/ boîte*</span>
+                        <div class="flex items-baseline gap-1">
+                            <span class="text-3xl font-extrabold text-nashi-900">
+                              {(parseFloat(offer.price.replace(/\s/g, '').replace(',', '.')) / 12 / offer.maxUsers).toFixed(2).replace('.', ',')}
+                            </span>
+                            <span class="text-nashi-900 text-xl font-bold">€</span>
+                        </div>
+                        <span class="text-nashi-900/60 text-xs text-center">HT / mois / boîte*</span>
                     </>
                 ) : (
-                    <span class="text-2xl font-bold text-nashi-900 pt-2">Contactez-nous</span>
+                    <span class="text-3xl font-extrabold text-nashi-900">{offer.price}</span>
                 )}
+              </div>
             </div>
           </div>
 
