@@ -32,7 +32,7 @@ Une suite bureautique complète, hébergée sur votre propre serveur privé :
 *   📅 **Agenda & Contacts** : Synchronisation CalDAV/CardDAV.
 *   📝 **Suite Bureautique** : Édition de documents en ligne (compatible Word/Excel/PowerPoint).
 *   📹 **Visioconférence** : Appels vidéo sécurisés et illimités.
-*   🤖 **Automatisation IA** : Workflows intelligents (type n8n) pour booster votre productivité.
+*   🤖 **[NOUVEAU] IA & Automatisation** : Workflows intelligents (n8n) et modèles de langage souverains pour booster votre productivité.
 
 ---
 
@@ -55,7 +55,8 @@ Pourquoi payer des licences par utilisateur quand vous pouvez louer votre propre
 ## 🔗 Liens Utiles
 
 *   🌍 **Site Officiel** : [https://nashi.cloud](https://nashi.cloud)
-*   💼 **Offres & Tarifs** : [https://nashi.cloud/#tarifs](https://nashi.cloud/#tarifs)
+*   🤖 **Offres IA & Automation** : [https://nashi.cloud/ia-automation](https://nashi.cloud/ia-automation)
+*   💼 **Comparateur ROI** : [https://nashi.cloud/comparatif](https://nashi.cloud/comparatif)
 *   📞 **Contact** : [contact@nashi.cloud](mailto:contact@nashi.cloud)
 
 ---
