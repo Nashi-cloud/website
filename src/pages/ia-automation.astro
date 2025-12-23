@@ -109,7 +109,7 @@ const pythonOffers = [
     maxUsers: 1,
     desc: "Tri emails, posts réseaux...",
     features: [
-      "Exécution 1x / jour",
+      "Exécutions programmées (Fair Use)",
       "Script Python managé",
       "Mise à jour API incluse",
       "Quota IA : 1M Tokens / mois"
@@ -122,7 +122,7 @@ const pythonOffers = [
     maxUsers: 1,
     desc: "Scrapers, CRM sync, RAG...",
     features: [
-      "Exécution chaque heure",
+      "Haute fréquence & Multi-scripts",
       "Python + Base de données dédiée",
       "Mise à jour API incluse",
       "Quota IA : 5M Tokens / mois"
@@ -404,6 +404,7 @@ const pythonOffers = [
                   </ul>
                   
                   <div class="text-center mt-auto">
+                    <p class="text-xs text-nashi-900/40 mb-3">+ Frais de setup (One-shot)</p>
                     <button 
                       @click="$dispatch('open-contact-modal', { offer: 'n8n ' + offer.name })"
                       class={`inline-block w-full py-2.5 px-4 rounded-xl font-bold text-sm transition-all ${offer.highlight ? 'bg-nashi-600 text-white hover:bg-nashi-900 shadow-md hover:shadow-lg' : 'bg-nashi-100 text-nashi-900 hover:bg-nashi-200'}`}
@@ -479,9 +480,12 @@ const pythonOffers = [
             </div>
         </div>
 
-        <div class="mt-12 text-center">
+        <div class="mt-12 text-center space-y-2">
             <p class="text-sm text-nashi-900/60 italic">
                 * Tarifs hors taxes. Facturation mensuelle.
+            </p>
+            <p class="text-xs text-nashi-900/40 max-w-2xl mx-auto">
+                ** Fair Use : Le nombre d'exécutions n'est pas bridé logiciellement mais reste limité par les ressources CPU/RAM de votre instance dédiée et les quotas d'API tiers.
             </p>
         </div>
 
