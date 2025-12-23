@@ -58,8 +58,10 @@ const intelligenceOffers = [
 const n8nOffers = [
   {
     name: "Starter",
-    target: "1 Admin",
+    target: "Découverte",
     price: "49",
+    maxUsers: 1,
+    users: "1 utilisateur",
     features: [
       "Instance n8n Pré-configurée",
       "10 Workflows actifs",
@@ -70,8 +72,10 @@ const n8nOffers = [
   },
   {
     name: "Pro",
-    target: "Jusqu'à 5 Admins",
+    target: "Production",
     price: "129",
+    maxUsers: 5,
+    users: "1 à 5 utilisateurs",
     features: [
       "n8n + Environnement Python",
       "Workflows Illimités",
@@ -83,8 +87,10 @@ const n8nOffers = [
   },
   {
     name: "Enterprise",
-    target: "Équipe illimitée",
+    target: "Échelle",
     price: "299",
+    maxUsers: null,
+    users: "utilisateurs illimités",
     features: [
       "n8n Haute Dispo (Workers)",
       "Workflows Illimités & Prioritaires",
@@ -100,6 +106,7 @@ const pythonOffers = [
     name: "Runner Start",
     target: "Tâches simples",
     price: "79",
+    maxUsers: 1,
     desc: "Tri emails, posts réseaux...",
     features: [
       "Exécution 1x / jour",
@@ -112,6 +119,7 @@ const pythonOffers = [
     name: "Runner Pro",
     target: "Tâches lourdes",
     price: "199",
+    maxUsers: 1,
     desc: "Scrapers, CRM sync, RAG...",
     features: [
       "Exécution chaque heure",
@@ -125,6 +133,7 @@ const pythonOffers = [
     name: "Runner Elite",
     target: "Critique / Temps réel",
     price: "Sur Devis",
+    maxUsers: null,
     desc: "Gros volumes, Webhooks...",
     features: [
       "Temps réel / Webhooks",
@@ -139,7 +148,7 @@ const pythonOffers = [
 <Layout title="IA & Automatisation Souveraine | Nashi Cloud">
   <Header />
   
-  <main class="pt-20" x-data="{ automationTab: 'n8n' }">
+  <main class="pt-20" x-data="{ automationTab: 'n8n', perUser: false }">
     <!-- Hero Section -->
     <section class="relative py-20 bg-nashi-900 overflow-hidden">
       <div class="absolute inset-0 overflow-hidden">
@@ -170,11 +179,11 @@ const pythonOffers = [
     </section>
 
     <!-- SECTION 1: NASHI INTELLIGENCE -->
-    <section id="intelligence" class="py-24 bg-white" x-data="{ perUser: false }">
+    <section id="intelligence" class="py-24 bg-nashi-100/50">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-12">
           <h2 class="text-3xl md:text-4xl font-bold text-nashi-900 mb-4">Nashi Intelligence</h2>
-          <p class="text-lg text-nashi-600 max-w-2xl mx-auto mb-8">
+          <p class="text-lg text-nashi-900/70 max-w-2xl mx-auto mb-8">
             Votre assistant d'entreprise sécurisé (type ChatGPT), connecté à vos documents, hébergé chez vous.
           </p>
 
@@ -199,77 +208,91 @@ const pythonOffers = [
         <!-- Pricing Intelligence -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
           {intelligenceOffers.map(offer => (
-            <div class={`relative rounded-2xl p-8 flex flex-col ${offer.highlight ? 'bg-nashi-900 text-white shadow-xl scale-105 z-10' : 'bg-white border border-nashi-200 text-nashi-900'}`}>
+            <div class={`relative rounded-2xl p-6 transition-all duration-300 flex flex-col ${offer.highlight ? 'bg-white shadow-xl border-2 border-nashi-500 scale-105 z-10' : 'bg-white/60 border border-nashi-200 hover:bg-white hover:shadow-lg'}`}>
               {offer.highlight && (
                 <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                  <span class="bg-nashi-500 text-nashi-900 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">Recommandé</span>
+                  <span class="bg-nashi-500 text-nashi-900 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide whitespace-nowrap">
+                    Recommandé
+                  </span>
                 </div>
               )}
-              <h3 class="text-2xl font-bold mb-2">{offer.name}</h3>
-              <p class={`text-sm mb-6 ${offer.highlight ? 'text-nashi-300' : 'text-nashi-500'}`}>{offer.target}</p>
               
-              <div class="mb-6 h-20 relative overflow-hidden">
-                <!-- Prix Total -->
-                <div 
-                    class="absolute inset-0 flex flex-col justify-center transition-all duration-500 ease-out"
-                    :class="!perUser ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8 pointer-events-none'"
-                >
-                    <div class="flex items-baseline gap-1">
-                        <span class="text-4xl font-extrabold">{offer.price}€</span>
-                        <span class={`text-sm ${offer.highlight ? 'text-nashi-300' : 'text-nashi-500'}`}> HT / mois</span>
-                    </div>
-                    <span class={`text-xs ${offer.highlight ? 'text-nashi-400' : 'text-nashi-400'}`}>Pour {offer.users}</span>
-                </div>
+              <div class="text-center mb-6">
+                <h3 class="text-xl font-bold text-nashi-900">{offer.name}</h3>
+                <p class="text-nashi-600 text-sm font-medium mt-1">{offer.target}</p>
+                
+                <div class="mt-4 relative h-20 w-full overflow-hidden">
+                  <!-- Prix Total -->
+                  <div 
+                      class="absolute inset-0 flex flex-col items-center justify-center transition-all duration-500 ease-out"
+                      :class="!perUser ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8 pointer-events-none'"
+                  >
+                      <div class="flex items-baseline gap-1">
+                          <span class="text-3xl font-extrabold text-nashi-900">{offer.price}</span>
+                          <span class="text-nashi-900 text-xl font-bold">€</span>
+                      </div>
+                      <span class="text-nashi-900/60 text-sm text-center">HT / mois (Total)*</span>
+                      <span class="text-nashi-900/40 text-[10px] mt-1">Pour {offer.users}</span>
+                  </div>
 
-                <!-- Prix par Utilisateur -->
-                <div 
-                    class="absolute inset-0 flex flex-col justify-center transition-all duration-500 ease-out"
-                    :class="perUser ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-8 pointer-events-none'"
-                >
-                    <div class="flex items-baseline gap-1">
-                        <span class="text-4xl font-extrabold">{(parseInt(offer.price) / offer.maxUsers).toFixed(0)}€</span>
-                        <span class={`text-sm ${offer.highlight ? 'text-nashi-300' : 'text-nashi-500'}`}> HT / mois</span>
-                    </div>
-                    <span class={`text-xs ${offer.highlight ? 'text-nashi-400' : 'text-nashi-400'}`}>par utilisateur (base {offer.maxUsers})</span>
+                  <!-- Prix par Utilisateur -->
+                  <div 
+                      class="absolute inset-0 flex flex-col items-center justify-center transition-all duration-500 ease-out"
+                      :class="perUser ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-8 pointer-events-none'"
+                  >
+                      <div class="flex items-baseline gap-1">
+                          <span class="text-3xl font-extrabold text-nashi-900">{(parseInt(offer.price) / offer.maxUsers).toFixed(0)}</span>
+                          <span class="text-nashi-900 text-xl font-bold">€</span>
+                      </div>
+                      <span class="text-nashi-900/60 text-sm text-center">HT / mois / utilisateur*</span>
+                      <span class="text-nashi-900/40 text-[10px] mt-1">base {offer.maxUsers} utilisateurs</span>
+                  </div>
                 </div>
               </div>
 
-              <ul class="space-y-4 mb-8 flex-grow">
+              <ul class="space-y-3 mb-8 flex-grow">
                 {offer.features.map(feature => (
-                  <li class="flex items-start">
-                    <svg class={`w-5 h-5 mr-3 flex-shrink-0 ${offer.highlight ? 'text-nashi-400' : 'text-nashi-600'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <li class="flex items-start gap-2">
+                    <svg class="w-4 h-4 text-nashi-600 flex-shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                     </svg>
-                    <span class="text-sm">{feature}</span>
+                    <span class="text-nashi-900/80 text-sm text-left">{feature}</span>
                   </li>
                 ))}
               </ul>
 
-              <button 
-                @click="$dispatch('open-contact-modal', { offer: 'Intelligence ' + offer.name })"
-                class={`w-full py-3 rounded-xl font-bold transition-all ${offer.highlight ? 'bg-white text-nashi-900 hover:bg-nashi-100' : 'bg-nashi-100 text-nashi-900 hover:bg-nashi-200'}`}
-              >
-                Choisir {offer.name}
-              </button>
+              <div class="text-center mt-auto">
+                <button 
+                  @click="$dispatch('open-contact-modal', { offer: 'Intelligence ' + offer.name })"
+                  class={`inline-block w-full py-2.5 px-4 rounded-xl font-bold text-sm transition-all ${offer.highlight ? 'bg-nashi-600 text-white hover:bg-nashi-900 shadow-md hover:shadow-lg' : 'bg-nashi-100 text-nashi-900 hover:bg-nashi-200'}`}
+                >
+                  Choisir {offer.name}
+                </button>
+              </div>
             </div>
           ))}
         </div>
 
         <!-- Frais de mise en service -->
         <div class="mt-12 max-w-3xl mx-auto">
-            <div class="p-6 bg-nashi-50 rounded-xl border border-nashi-200 text-left flex flex-col md:flex-row gap-6 items-center">
-                <div class="flex-shrink-0 p-3 bg-white rounded-full shadow-sm">
-                    <svg class="w-8 h-8 text-nashi-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg>
-                </div>
-                <div class="flex-grow">
-                    <p class="text-lg text-nashi-900 font-bold mb-1">
-                        Mise en service (One-shot) : 420€ HT
-                    </p>
-                    <p class="text-sm text-nashi-600">
-                        Installation de votre instance IA privée, sécurisation du VPS, configuration du RAG (ingestion initiale de vos documents) et formation des administrateurs.
-                    </p>
-                </div>
+            <div class="p-6 bg-nashi-100/50 rounded-xl border border-nashi-200 text-left">
+                <p class="text-sm text-nashi-900 font-medium mb-2 flex items-center gap-2">
+                    <svg class="w-5 h-5 text-nashi-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg>
+                    <span class="font-bold text-nashi-600">Mise en service (One-shot) : 420€ HT</span>
+                </p>
+                <p class="text-xs text-nashi-900/70 leading-relaxed">
+                    Installation de votre instance IA privée, sécurisation du VPS, configuration du RAG (ingestion initiale de vos documents) et formation des administrateurs.
+                </p>
             </div>
+        </div>
+
+        <div class="mt-12 text-center space-y-2">
+            <p class="text-sm text-nashi-900/60 italic">
+                * Tarifs hors taxes. Facturation mensuelle.
+            </p>
+            <p class="text-xs text-nashi-900/40" x-show="perUser">
+                * Prix par utilisateur calculé sur la base maximale de l'offre ({intelligenceOffers.map(o => o.maxUsers).join(', ')} utilisateurs).
+            </p>
         </div>
 
         <!-- Modèles Disponibles (Annexe) -->
@@ -277,22 +300,22 @@ const pythonOffers = [
             <h3 class="text-lg font-bold text-nashi-900 uppercase tracking-wider mb-10">Modèles IA Supportés (Liste non exhaustive)</h3>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
                 <!-- Mistral -->
-                <div class="flex flex-col items-center p-6 rounded-2xl bg-nashi-50 border border-nashi-100 hover:border-nashi-300 transition-colors">
+                <div class="flex flex-col items-center p-6 rounded-2xl bg-white/60 border border-nashi-200 hover:border-nashi-300 transition-colors">
                     <span class="font-extrabold text-xl text-nashi-900 mb-2">Mistral AI</span>
                     <span class="text-sm text-nashi-600 font-medium">France / Open Source</span>
                 </div>
                 <!-- Meta -->
-                <div class="flex flex-col items-center p-6 rounded-2xl bg-nashi-50 border border-nashi-100 hover:border-blue-200 transition-colors">
+                <div class="flex flex-col items-center p-6 rounded-2xl bg-white/60 border border-nashi-200 hover:border-blue-200 transition-colors">
                     <span class="font-extrabold text-xl text-nashi-900 mb-2">Llama 3</span>
                     <span class="text-sm text-nashi-600 font-medium">Meta / Performance</span>
                 </div>
                 <!-- Google -->
-                <div class="flex flex-col items-center p-6 rounded-2xl bg-nashi-50 border border-nashi-100 hover:border-red-200 transition-colors">
+                <div class="flex flex-col items-center p-6 rounded-2xl bg-white/60 border border-nashi-200 hover:border-red-200 transition-colors">
                     <span class="font-extrabold text-xl text-nashi-900 mb-2">Gemma</span>
                     <span class="text-sm text-nashi-600 font-medium">Google / Lightweight</span>
                 </div>
                 <!-- Qwen -->
-                <div class="flex flex-col items-center p-6 rounded-2xl bg-nashi-50 border border-nashi-100 hover:border-purple-200 transition-colors">
+                <div class="flex flex-col items-center p-6 rounded-2xl bg-white/60 border border-nashi-200 hover:border-purple-200 transition-colors">
                     <span class="font-extrabold text-xl text-nashi-900 mb-2">Qwen</span>
                     <span class="text-sm text-nashi-600 font-medium">Alibaba / Code</span>
                 </div>
@@ -307,19 +330,19 @@ const pythonOffers = [
     </section>
 
     <!-- SECTION 2: NASHI AUTOMATE -->
-    <section id="automate" class="py-24 bg-nashi-50">
+    <section id="automate" class="py-24 bg-nashi-100/50">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-12">
           <h2 class="text-3xl md:text-4xl font-bold text-nashi-900 mb-4">Nashi Automate</h2>
-          <p class="text-lg text-nashi-600 max-w-2xl mx-auto mb-8">
+          <p class="text-lg text-nashi-900/70 max-w-2xl mx-auto mb-8">
             Le moteur de votre productivité. Choisissez votre mode de fonctionnement.
           </p>
           
           <!-- TABS -->
-          <div class="inline-flex bg-white p-1 rounded-xl border border-nashi-200 shadow-sm">
+          <div class="inline-flex bg-white p-1 rounded-xl border border-nashi-200 shadow-sm mb-8">
             <button 
                 @click="automationTab = 'n8n'"
-                :class="automationTab === 'n8n' ? 'bg-orange-100 text-orange-800 shadow-sm' : 'text-nashi-600 hover:bg-nashi-50'"
+                :class="automationTab === 'n8n' ? 'bg-nashi-100 text-nashi-900 shadow-sm' : 'text-nashi-600 hover:bg-nashi-50'"
                 class="px-6 py-2.5 rounded-lg font-bold text-sm transition-all flex items-center gap-2"
             >
                 <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
@@ -327,7 +350,7 @@ const pythonOffers = [
             </button>
             <button 
                 @click="automationTab = 'python'"
-                :class="automationTab === 'python' ? 'bg-blue-100 text-blue-800 shadow-sm' : 'text-nashi-600 hover:bg-nashi-50'"
+                :class="automationTab === 'python' ? 'bg-nashi-100 text-nashi-900 shadow-sm' : 'text-nashi-600 hover:bg-nashi-50'"
                 class="px-6 py-2.5 rounded-lg font-bold text-sm transition-all flex items-center gap-2"
             >
                 <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>
@@ -338,39 +361,56 @@ const pythonOffers = [
 
         <!-- CONTENT: n8n -->
         <div x-show="automationTab === 'n8n'" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 transform scale-95" x-transition:enter-end="opacity-100 transform scale-100">
-            <div class="bg-orange-50 border border-orange-100 rounded-2xl p-6 mb-8 text-center max-w-3xl mx-auto">
-                <h3 class="font-bold text-orange-900 mb-2">Pour les équipes techniques</h3>
-                <p class="text-orange-800/80 text-sm">
+            <div class="bg-white/60 border border-nashi-200 rounded-2xl p-6 mb-8 text-center max-w-3xl mx-auto">
+                <h3 class="font-bold text-nashi-900 mb-2">Pour les équipes techniques</h3>
+                <p class="text-nashi-900/70 text-sm">
                     Nous déployons et maintenons votre instance n8n sur nos serveurs. Vous créez vos workflows en toute liberté.
                 </p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
               {n8nOffers.map(offer => (
-                <div class={`bg-white p-8 rounded-2xl border transition-all flex flex-col ${offer.highlight ? 'border-orange-400 shadow-lg scale-105 z-10' : 'border-nashi-200 hover:border-orange-300'}`}>
-                  {offer.highlight && <div class="text-center mb-4"><span class="bg-orange-100 text-orange-800 text-xs font-bold px-3 py-1 rounded-full uppercase">Populaire</span></div>}
-                  <h4 class="font-bold text-2xl text-nashi-900 mb-1">{offer.name}</h4>
-                  <p class="text-sm text-nashi-500 mb-6">{offer.target}</p>
+                <div class={`relative rounded-2xl p-6 transition-all duration-300 flex flex-col ${offer.highlight ? 'bg-white shadow-xl border-2 border-nashi-500 scale-105 z-10' : 'bg-white/60 border border-nashi-200 hover:bg-white hover:shadow-lg'}`}>
+                  {offer.highlight && (
+                    <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                      <span class="bg-nashi-500 text-nashi-900 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide whitespace-nowrap">
+                        Populaire
+                      </span>
+                    </div>
+                  )}
                   
-                  <div class="mb-6">
-                      <span class="text-4xl font-extrabold text-nashi-900">{offer.price}€</span>
-                      <span class="text-sm text-nashi-500"> HT / mois</span>
+                  <div class="text-center mb-6">
+                    <h4 class="text-xl font-bold text-nashi-900">{offer.name}</h4>
+                    <p class="text-nashi-600 text-sm font-medium mt-1">{offer.target}</p>
+                    
+                    <div class="mt-4 relative h-20 w-full flex flex-col items-center justify-center">
+                        <div class="flex items-baseline gap-1">
+                            <span class="text-3xl font-extrabold text-nashi-900">{offer.price}</span>
+                            <span class="text-nashi-900 text-xl font-bold">€</span>
+                        </div>
+                        <span class="text-nashi-900/60 text-sm text-center">HT / mois*</span>
+                    </div>
                   </div>
 
                   <ul class="space-y-3 mb-8 flex-grow">
                     {offer.features.map(feature => (
-                      <li class="flex items-center text-sm text-nashi-700">
-                        <svg class="w-5 h-5 mr-3 text-orange-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
-                        {feature}
+                      <li class="flex items-start gap-2">
+                        <svg class="w-4 h-4 text-nashi-600 flex-shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                        <span class="text-nashi-900/80 text-sm text-left">{feature}</span>
                       </li>
                     ))}
                   </ul>
-                  <button 
-                    @click="$dispatch('open-contact-modal', { offer: 'n8n ' + offer.name })"
-                    class={`w-full py-3 rounded-xl font-bold transition-colors ${offer.highlight ? 'bg-orange-500 text-white hover:bg-orange-600' : 'bg-orange-50 text-orange-900 hover:bg-orange-100'}`}
-                  >
-                    Choisir {offer.name}
-                  </button>
+                  
+                  <div class="text-center mt-auto">
+                    <button 
+                      @click="$dispatch('open-contact-modal', { offer: 'n8n ' + offer.name })"
+                      class={`inline-block w-full py-2.5 px-4 rounded-xl font-bold text-sm transition-all ${offer.highlight ? 'bg-nashi-600 text-white hover:bg-nashi-900 shadow-md hover:shadow-lg' : 'bg-nashi-100 text-nashi-900 hover:bg-nashi-200'}`}
+                    >
+                      Choisir {offer.name}
+                    </button>
+                  </div>
                 </div>
               ))}
             </div>
@@ -378,41 +418,58 @@ const pythonOffers = [
 
         <!-- CONTENT: Python -->
         <div x-show="automationTab === 'python'" style="display: none;" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 transform scale-95" x-transition:enter-end="opacity-100 transform scale-100">
-            <div class="bg-blue-50 border border-blue-100 rounded-2xl p-6 mb-8 text-center max-w-3xl mx-auto">
-                <h3 class="font-bold text-blue-900 mb-2">Solution "Clé en main"</h3>
-                <p class="text-blue-800/80 text-sm">
+            <div class="bg-white/60 border border-nashi-200 rounded-2xl p-6 mb-8 text-center max-w-3xl mx-auto">
+                <h3 class="font-bold text-nashi-900 mb-2">Solution "Clé en main"</h3>
+                <p class="text-nashi-900/70 text-sm">
                     Dites-nous ce que vous voulez automatiser. Nos développeurs codent des scripts Python robustes et maintenables pour vous.
                 </p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
               {pythonOffers.map(offer => (
-                <div class={`bg-white p-8 rounded-2xl border transition-all flex flex-col ${offer.highlight ? 'border-blue-400 shadow-lg scale-105 z-10' : 'border-nashi-200 hover:border-blue-300'}`}>
-                  {offer.highlight && <div class="text-center mb-4"><span class="bg-blue-100 text-blue-800 text-xs font-bold px-3 py-1 rounded-full uppercase">Recommandé</span></div>}
-                  <h4 class="font-bold text-2xl text-nashi-900 mb-1">{offer.name}</h4>
-                  <p class="text-sm text-nashi-500 mb-2 italic">{offer.desc}</p>
-                  <p class="text-xs text-nashi-400 mb-6">{offer.target}</p>
+                <div class={`relative rounded-2xl p-6 transition-all duration-300 flex flex-col ${offer.highlight ? 'bg-white shadow-xl border-2 border-nashi-500 scale-105 z-10' : 'bg-white/60 border border-nashi-200 hover:bg-white hover:shadow-lg'}`}>
+                  {offer.highlight && (
+                    <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                      <span class="bg-nashi-500 text-nashi-900 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide whitespace-nowrap">
+                        Recommandé
+                      </span>
+                    </div>
+                  )}
                   
-                  <div class="mb-6">
-                      <span class="text-3xl font-extrabold text-nashi-900">{offer.price}</span>
-                      {offer.price !== "Sur Devis" && <span class="text-xl font-bold text-nashi-900">€</span>}
-                      {offer.price !== "Sur Devis" && <span class="text-sm text-nashi-500"> / mois</span>}
+                  <div class="text-center mb-6">
+                    <h4 class="text-xl font-bold text-nashi-900">{offer.name}</h4>
+                    <p class="text-nashi-600 text-sm font-medium mt-1">{offer.target}</p>
+                    
+                    <div class="mt-4 relative h-20 w-full flex flex-col items-center justify-center">
+                        <div class="flex items-baseline gap-1">
+                            <span class="text-3xl font-extrabold text-nashi-900">{offer.price}</span>
+                            {offer.price !== "Sur Devis" && <span class="text-nashi-900 text-xl font-bold">€</span>}
+                        </div>
+                        {offer.price !== "Sur Devis" && (
+                          <>
+                            <span class="text-nashi-900/60 text-sm text-center">HT / mois*</span>
+                            <span class="text-nashi-900/40 text-[10px] mt-1">{offer.desc}</span>
+                          </>
+                        )}
+                    </div>
                   </div>
 
                   <ul class="space-y-3 mb-8 flex-grow">
                     {offer.features.map(feature => (
-                      <li class="flex items-center text-sm text-nashi-700">
-                        <svg class="w-5 h-5 mr-3 text-blue-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
-                        {feature}
+                      <li class="flex items-start gap-2">
+                        <svg class="w-4 h-4 text-nashi-600 flex-shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                        <span class="text-nashi-900/80 text-sm text-left">{feature}</span>
                       </li>
                     ))}
                   </ul>
                   
-                  <div class="mt-auto">
-                    <p class="text-xs text-center text-nashi-400 mb-3">+ Frais de setup (One-shot)</p>
+                  <div class="text-center mt-auto">
+                    <p class="text-xs text-nashi-900/40 mb-3">+ Frais de setup (One-shot)</p>
                     <button 
                       @click="$dispatch('open-contact-modal', { offer: 'Python ' + offer.name })"
-                      class={`w-full py-3 rounded-xl font-bold transition-colors ${offer.highlight ? 'bg-blue-600 text-white hover:bg-blue-700' : 'bg-blue-50 text-blue-900 hover:bg-blue-100'}`}
+                      class={`inline-block w-full py-2.5 px-4 rounded-xl font-bold text-sm transition-all ${offer.highlight ? 'bg-nashi-600 text-white hover:bg-nashi-900 shadow-md hover:shadow-lg' : 'bg-nashi-100 text-nashi-900 hover:bg-nashi-200'}`}
                     >
                       Demander un devis
                     </button>
@@ -420,6 +477,12 @@ const pythonOffers = [
                 </div>
               ))}
             </div>
+        </div>
+
+        <div class="mt-12 text-center">
+            <p class="text-sm text-nashi-900/60 italic">
+                * Tarifs hors taxes. Facturation mensuelle.
+            </p>
         </div>
 
       </div>
