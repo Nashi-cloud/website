@@ -35,13 +35,26 @@ import Footer from '../components/Footer.astro';
         </p>
 
         <h3 class="text-xl font-bold text-nashi-900 mt-8 mb-4">ARTICLE 3 - DESCRIPTION DES SERVICES</h3>
-        <p>Nashi Cloud fournit des services d'infrastructure hébergés exclusivement en France :</p>
+        <p>Nashi Cloud fournit des services d'infrastructure et de logiciels hébergés exclusivement en France :</p>
         <ul class="list-disc pl-6 space-y-2">
-            <li><strong>VPS (Serveur Privé Virtuel) :</strong> Mise à disposition d'une machine virtuelle dédiée avec ressources garanties (vCore, RAM, Stockage).</li>
-            <li><strong>Nashi Mail :</strong> Service de messagerie électronique professionnelle sécurisée.</li>
-            <li><strong>Nashi Drive :</strong> Service de stockage et de partage de fichiers (basé sur Nextcloud).</li>
-            <li><strong>Backup Externalisé :</strong> Service de sauvegarde chiffrée sur un site distant distinct du site de production.</li>
+            <li><strong>VPS (Serveur Privé Virtuel) :</strong> Mise à disposition d'une machine virtuelle dédiée avec ressources garanties.</li>
+            <li><strong>Nashi Mail & Drive :</strong> Services de collaboration (messagerie, stockage) sécurisés.</li>
+            <li><strong>Nashi Intelligence :</strong> Mise à disposition de modèles de langage (LLM) et de moteurs de recherche vectorielle (RAG) via API ou interface Chat.</li>
+            <li><strong>Nashi Automate :</strong> Hébergement et exécution de workflows (n8n) et de scripts (Python).</li>
         </ul>
+
+        <h3 class="text-xl font-bold text-nashi-900 mt-8 mb-4">ARTICLE 3 BIS - SPÉCIFICITÉS IA & AUTOMATISATION</h3>
+        <p>
+            <strong>3.1. Intelligence Artificielle :</strong>
+            <br/>- <strong>Quotas :</strong> L'accès aux modèles est soumis à un quota mensuel de "Tokens" défini dans l'offre souscrite. En cas de dépassement, le service pourra être bridé ou facturé en supplément selon la grille tarifaire en vigueur.
+            <br/>- <strong>Exactitude :</strong> Le Client reconnaît que les réponses générées par les modèles d'IA (LLM) sont probabilistes et peuvent contenir des erreurs ("hallucinations"). Nashi Cloud ne garantit pas l'exactitude factuelle des réponses et ne saurait être tenu responsable des décisions prises sur la base de ces informations.
+            <br/>- <strong>Confidentialité (RAG) :</strong> Nashi Cloud garantit que les documents et données soumis par le Client au moteur RAG (Retrieval-Augmented Generation) sont indexés dans une base vectorielle privée et isolée. Ces données ne sont <strong>jamais</strong> utilisées pour l'entraînement des modèles globaux ni partagées avec des tiers.
+        </p>
+        <p class="mt-4">
+            <strong>3.2. Automatisation (n8n / Python) :</strong>
+            <br/>- <strong>Responsabilité :</strong> Nashi Cloud fournit l'environnement d'exécution. Le Client est seul responsable de la logique, de la sécurité et des conséquences des scripts ou workflows qu'il déploie (ex: suppression de données, boucles infinies).
+            <br/>- <strong>Maintenance :</strong> Sur les offres "Managées", Nashi Cloud assure le maintien en condition opérationnelle de l'infrastructure, mais pas le débogage du code du Client.
+        </p>
 
         <h3 class="text-xl font-bold text-nashi-900 mt-8 mb-4">ARTICLE 4 - COMMANDE ET DURÉE</h3>
         <p>
@@ -59,10 +72,14 @@ import Footer from '../components/Footer.astro';
             <strong>5.1. Tarifs :</strong> Les prix sont indiqués en Euros Hors Taxes (HT) pour les professionnels et Toutes Taxes Comprises (TTC) pour les particuliers. Nashi Cloud se réserve le droit de réviser ses tarifs à tout moment, sous réserve d'en informer le Client au moins 30 jours avant l'application du nouveau tarif.
         </p>
         <p>
-            <strong>5.2. Modalités de paiement :</strong> Les factures sont payables d'avance (terme à échoir). Le paiement s'effectue par prélèvement automatique (SEPA) ou carte bancaire.
+            <strong>5.2. Frais de mise en service :</strong> Certaines offres (notamment "Nashi Intelligence") peuvent inclure des frais d'installation initiaux ("Setup Fees"). Ces frais sont payables en une fois à la commande et restent définitivement acquis à Nashi Cloud, même en cas de résiliation anticipée, pour couvrir les coûts de déploiement manuel et de formation.
         </p>
         <p>
-            <strong>5.3. Retard de paiement :</strong> Tout retard de paiement entraînera de plein droit l'application d'une pénalité égale à trois (3) fois le taux d'intérêt légal en vigueur, ainsi qu'une indemnité forfaitaire pour frais de recouvrement de 40€ (pour les professionnels). En cas de non-paiement sous 7 jours après relance, Nashi Cloud se réserve le droit de suspendre les Services.
+            <strong>5.3. Modalités de paiement :</strong> Les factures sont payables d'avance (terme à échoir). Le paiement s'effectue par prélèvement automatique (SEPA) ou carte bancaire.
+            <br/>Une option de mensualisation des paiements est disponible via notre partenaire financier <strong>Stripe</strong>. En cas de choix de cette facilité de paiement, des frais de gestion de 2% seront appliqués sur chaque échéance pour couvrir les frais de transaction et de service.
+        </p>
+        <p>
+            <strong>5.4. Retard de paiement :</strong> Tout retard de paiement entraînera de plein droit l'application d'une pénalité égale à trois (3) fois le taux d'intérêt légal en vigueur, ainsi qu'une indemnité forfaitaire pour frais de recouvrement de 40€ (pour les professionnels). En cas de non-paiement sous 7 jours après relance, Nashi Cloud se réserve le droit de suspendre les Services.
         </p>
 
         <h3 class="text-xl font-bold text-nashi-900 mt-8 mb-4">ARTICLE 6 - OBLIGATIONS ET RESPONSABILITÉ DE NASHI CLOUD</h3>

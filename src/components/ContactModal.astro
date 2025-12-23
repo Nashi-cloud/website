@@ -112,11 +112,32 @@
                         <label for="offer" class="block text-sm font-medium text-nashi-900">Offre concernée</label>
                         <select id="offer" x-model="formData.offer" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-nashi-500 focus:ring-nashi-500 sm:text-sm py-2 px-3 border">
                             <option value="">Je ne sais pas encore</option>
-                            <option value="Starter">Starter (5 utilisateurs)</option>
-                            <option value="Pro">Pro (15 utilisateurs)</option>
-                            <option value="Enterprise">Enterprise (30+ utilisateurs)</option>
-                            <option value="IA & Automation">IA & Automatisation</option>
-                            <option value="Sur Mesure">Sur Mesure</option>
+                            
+                            <optgroup label="Cloud Souverain (Nextcloud)">
+                                <option value="Starter">Starter (5 utilisateurs)</option>
+                                <option value="Pro">Pro (15 utilisateurs)</option>
+                                <option value="Enterprise">Enterprise (30+ utilisateurs)</option>
+                            </optgroup>
+
+                            <optgroup label="Intelligence Artificielle">
+                                <option value="Intelligence Starter">IA Starter</option>
+                                <option value="Intelligence Pro">IA Pro</option>
+                                <option value="Intelligence Enterprise">IA Enterprise</option>
+                            </optgroup>
+
+                            <optgroup label="Automatisation (n8n)">
+                                <option value="n8n Starter">n8n Starter</option>
+                                <option value="n8n Pro">n8n Pro</option>
+                                <option value="n8n Enterprise">n8n Enterprise</option>
+                            </optgroup>
+
+                            <optgroup label="Développement Python">
+                                <option value="Python Runner Start">Runner Start</option>
+                                <option value="Python Runner Pro">Runner Pro</option>
+                                <option value="Python Runner Elite">Runner Elite</option>
+                            </optgroup>
+
+                            <option value="Sur Mesure">Autre / Sur Mesure</option>
                         </select>
                     </div>
 
