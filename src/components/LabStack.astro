@@ -1,0 +1,68 @@
+---
+const topics = [
+  {
+    title: "Containerisation",
+    tags: ["Podman", "Rootless containers", "OCI-compliance"],
+    icon: "container"
+  },
+  {
+    title: "Automation",
+    tags: ["GitHub Actions (CI/CD)", "Ansible", "devcontainers"],
+    icon: "automation"
+  },
+  {
+    title: "Sécurité",
+    tags: ["Zero-Trust", "Headscale", "Hardened Kernels"],
+    icon: "security"
+  },
+  {
+    title: "Architecture",
+    tags: ["Micro-services Python", "Front-end Astro", "Edge Computing"],
+    icon: "architecture"
+  }
+];
+---
+
+<section id="lab-stack" class="py-24 bg-white/40 backdrop-blur-sm">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <span class="bg-nashi-100 text-nashi-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">
+        Lab actif
+      </span>
+      <h2 class="text-3xl md:text-4xl font-bold text-nashi-900 mt-4 mb-4">Stack de Veille &amp; Lab</h2>
+      <p class="text-lg text-nashi-900/70 max-w-2xl mx-auto">
+        Les sujets d'étude et technologies en cours d'expérimentation dans notre laboratoire DevOps.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      {topics.map(topic => (
+        <div class="bg-white p-8 rounded-2xl shadow-sm border border-nashi-200 hover:shadow-xl hover:border-nashi-400 transition-all duration-300 group">
+          <div class="w-14 h-14 bg-nashi-100 rounded-xl flex items-center justify-center mb-6 group-hover:bg-nashi-500 transition-colors duration-300">
+            {topic.icon === 'container' && (
+              <svg class="w-8 h-8 text-nashi-900 group-hover:text-white transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" /></svg>
+            )}
+            {topic.icon === 'automation' && (
+              <svg class="w-8 h-8 text-nashi-900 group-hover:text-white transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+            )}
+            {topic.icon === 'security' && (
+              <svg class="w-8 h-8 text-nashi-900 group-hover:text-white transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
+            )}
+            {topic.icon === 'architecture' && (
+              <svg class="w-8 h-8 text-nashi-900 group-hover:text-white transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 5a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1H5a1 1 0 01-1-1V5zm10 0a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 01-1-1V5zM4 15a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1H5a1 1 0 01-1-1v-4zm10 0a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 01-1-1v-4z" /></svg>
+            )}
+          </div>
+          <h3 class="text-xl font-bold text-nashi-900 mb-4">{topic.title}</h3>
+          <ul class="space-y-2">
+            {topic.tags.map(tag => (
+              <li class="flex items-center gap-2">
+                <span class="inline-block w-1.5 h-1.5 rounded-full bg-nashi-500 flex-shrink-0"></span>
+                <span class="text-nashi-900/70 text-sm font-mono">{tag}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
