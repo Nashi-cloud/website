@@ -1,0 +1,62 @@
+---
+// Archive de l'ancienne landing page (Fournisseur de services cloud)
+// Conservée pour référence — ne pas supprimer.
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Services from '../components/archive/Services.astro';
+import Values from '../components/archive/Values.astro';
+import Pricing from '../components/archive/Pricing.astro';
+import AIAutomation from '../components/archive/AIAutomation.astro';
+---
+
+<Layout title="[Archive] Nashi Cloud | Hébergement Souverain & Services Cloud">
+	<Header />
+	<main>
+		<!-- Hero archivé -->
+		<section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+		  <div class="absolute top-0 left-0 w-full h-full overflow-hidden -z-10">
+		    <div class="absolute -top-[20%] -right-[10%] w-[70%] h-[70%] rounded-full bg-nashi-300/30 blur-3xl"></div>
+		    <div class="absolute top-[20%] -left-[10%] w-[50%] h-[50%] rounded-full bg-nashi-500/20 blur-3xl"></div>
+		  </div>
+		  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+		    <p class="text-sm font-mono text-nashi-600 mb-4 uppercase tracking-widest">— Archive —</p>
+		    <h1 class="text-5xl md:text-7xl font-extrabold text-nashi-900 tracking-tight mb-8">
+		      Le Cloud Souverain,<br/>
+		      <span class="text-transparent bg-clip-text bg-gradient-to-r from-nashi-600 to-nashi-900">Tranché &amp; Maîtrisé.</span>
+		    </h1>
+		    <p class="mt-6 max-w-2xl mx-auto text-xl text-nashi-900/80 leading-relaxed">
+		      Une alternative française, éthique et performante aux géants du web.
+		      Hébergement de fichiers, mails, VPS et IA, le tout hébergé en France.
+		    </p>
+		    <div class="mt-10 flex justify-center gap-4">
+		      <a href="#tarifs" class="px-8 py-4 rounded-full bg-nashi-900 text-nashi-100 font-bold text-lg hover:bg-nashi-600 hover:text-white transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+		        Découvrir nos offres
+		      </a>
+		      <a href="#services" class="px-8 py-4 rounded-full bg-white/50 border border-nashi-900/10 text-nashi-900 font-bold text-lg hover:bg-white hover:border-nashi-600 transition-all shadow-sm hover:shadow-md">
+		        En savoir plus
+		      </a>
+		    </div>
+		  </div>
+		</section>
+
+		<Services />
+		<Values />
+		<Pricing />
+		<AIAutomation />
+
+		<!-- Section Contact Rapide (archivée) -->
+		<section id="contact" class="py-24 px-4 text-center">
+			<div class="max-w-4xl mx-auto bg-white rounded-3xl p-12 shadow-xl border border-nashi-200">
+				<h2 class="text-3xl font-bold text-nashi-900 mb-6">Prêt à reprendre le contrôle de vos données ?</h2>
+				<p class="text-lg text-nashi-900/70 mb-8">
+					Le lancement est prévu pour Janvier 2026. Contactez-nous dès maintenant pour réserver votre infrastructure ou en savoir plus sur nos offres de lancement.
+				</p>
+				<button @click="$dispatch('open-contact-modal')" class="inline-block px-8 py-4 rounded-full bg-nashi-600 text-white font-bold text-lg hover:bg-nashi-900 transition-all shadow-lg hover:shadow-xl">
+					Nous contacter
+				</button>
+			</div>
+		</section>
+	</main>
+	<Footer />
+</Layout>

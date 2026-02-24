@@ -1,0 +1,226 @@
+---
+const offers = [
+  {
+    name: "Starter",
+    target: "Jusqu'à 5 boîtes",
+    price: "348,00",
+    maxUsers: 5,
+    features: [
+      "Suite : Mail, Drive, Agenda, Visio",
+      "Serveur Privé Essentiel",
+      "Performance adaptée TPE",
+      "125 Go de Stockage Rapide",
+      "Sauvegardes Quotidiennes (J-7)",
+      "Backup Externalisé & Chiffré",
+      "Maintenance de sécurité incluse"
+    ],
+    highlight: false
+  },
+  {
+    name: "Pro",
+    target: "Jusqu'à 15 boîtes",
+    price: "708,00",
+    maxUsers: 15,
+    features: [
+      "Suite : Mail, Drive, Agenda, Visio",
+      "Serveur Privé Performance",
+      "Fluidité maximale & Multitâche",
+      "250 Go de Stockage Rapide",
+      "Sauvegardes Quotidiennes (J-7)",
+      "Backup Externalisé & Chiffré",
+      "Recherche instantanée (Mails & Fichiers)",
+      "Support prioritaire"
+    ],
+    highlight: true
+  },
+  {
+    name: "Enterprise",
+    target: "Jusqu'à 30 boîtes",
+    price: "1 308,00",
+    maxUsers: 30,
+    features: [
+      "Suite : Mail, Drive, Agenda, Visio",
+      "Serveur Privé Haute Capacité",
+      "Infrastructure dimensionnée pour l'intensité",
+      "700 Go de Stockage Rapide",
+      "Sauvegardes Quotidiennes (J-7)",
+      "Backup Externalisé & Chiffré",
+      "Optimisation continue des performances",
+      "Support VIP & Monitoring Proactif"
+    ],
+    highlight: false
+  },
+  {
+    name: "Sur Mesure",
+    target: "Au delà de 30 boîtes",
+    price: "Sur devis",
+    maxUsers: null,
+    features: [
+      "Suite Complète sur mesure",
+      "Infrastructure dédiée sur mesure",
+      "Conformité NIS2 & HDS (Option)",
+      "Chiffrement Disque LUKS",
+      "SSO / SAML & LDAP",
+      "Haute Disponibilité & Redondance",
+      "SLA Garanti & Support 24/7"
+    ],
+    highlight: false
+  }
+];
+---
+
+<section id="tarifs" class="py-24 bg-nashi-100/50" x-data="{ annual: true }">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-bold text-nashi-900 mb-4">Nos Offres Cloud</h2>
+      <p class="text-lg text-nashi-900/70 max-w-2xl mx-auto mb-8">
+        Des solutions clés en main (Mail, Drive, Agenda, Visio), propulsées par la technologie <strong>Nextcloud</strong>, hébergées en France, avec une infrastructure dédiée pour chaque client.
+      </p>
+
+      <!-- Toggle Switch -->
+      <div class="flex items-center justify-center gap-4">
+        <span class="text-sm font-medium" :class="!annual ? 'text-nashi-900 font-bold' : 'text-nashi-900/60'">Mensuel / Boîte</span>
+        <button 
+            class="relative inline-flex h-8 w-14 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-nashi-500 focus:ring-offset-2"
+            :class="annual ? 'bg-nashi-600' : 'bg-nashi-300'"
+            @click="annual = !annual"
+        >
+            <span class="sr-only">Changer la fréquence de facturation</span>
+            <span 
+                class="inline-block h-6 w-6 transform rounded-full bg-white transition-transform shadow-sm"
+                :class="annual ? 'translate-x-7' : 'translate-x-1'"
+            />
+        </button>
+        <span class="text-sm font-medium" :class="annual ? 'text-nashi-900 font-bold' : 'text-nashi-900/60'">Annuel (Total)</span>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {offers.map(offer => (
+        <div class={`relative rounded-2xl p-6 transition-all duration-300 flex flex-col ${offer.highlight ? 'bg-white shadow-xl border-2 border-nashi-500 scale-105 z-10' : 'bg-white/60 border border-nashi-200 hover:bg-white hover:shadow-lg'}`}>
+          
+          {offer.highlight && (
+            <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+              <span class="bg-nashi-500 text-nashi-900 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide whitespace-nowrap">
+                Recommandé
+              </span>
+            </div>
+          )}
+
+          <div class="text-center mb-6">
+            <h3 class="text-xl font-bold text-nashi-900">{offer.name}</h3>
+            <p class="text-nashi-600 text-sm font-medium mt-1">{offer.target}</p>
+            
+            <!-- Prix avec Animation -->
+            <div class="mt-4 relative h-20 w-full overflow-hidden">
+              <!-- Prix Annuel -->
+              <div 
+                class="absolute inset-0 flex flex-col items-center justify-center transition-all duration-500 ease-out"
+                :class="annual ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8 pointer-events-none'"
+              >
+                <div class="flex items-baseline gap-1">
+                  <span class="text-3xl font-extrabold text-nashi-900">{offer.price}</span>
+                  {offer.maxUsers && <span class="text-nashi-900 text-xl font-bold">€</span>}
+                </div>
+                {offer.maxUsers && <span class="text-nashi-900/60 text-sm">HT / an</span>}
+              </div>
+
+              <!-- Prix Mensuel par Boîte (Calculé) -->
+              <div 
+                class="absolute inset-0 flex flex-col items-center justify-center transition-all duration-500 ease-out"
+                :class="!annual ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-8 pointer-events-none'"
+              >
+                {offer.maxUsers ? (
+                    <>
+                        <div class="flex items-baseline gap-1">
+                            <span class="text-3xl font-extrabold text-nashi-900">
+                              {(parseFloat(offer.price.replace(/\s/g, '').replace(',', '.')) / 12 / offer.maxUsers).toFixed(2).replace('.', ',')}
+                            </span>
+                            <span class="text-nashi-900 text-xl font-bold">€</span>
+                        </div>
+                        <span class="text-nashi-900/60 text-xs text-center">HT / mois / boîte*</span>
+                    </>
+                ) : (
+                    <span class="text-3xl font-extrabold text-nashi-900">{offer.price}</span>
+                )}
+              </div>
+            </div>
+          </div>
+
+          <ul class="space-y-3 mb-8 flex-grow">
+            {offer.features.map(feature => (
+              <li class="flex items-start gap-2">
+                <svg class="w-4 h-4 text-nashi-600 flex-shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <span class="text-nashi-900/80 text-sm text-left">{feature}</span>
+              </li>
+            ))}
+          </ul>
+
+          <div class="text-center mt-auto">
+            {offer.maxUsers ? (
+              <a href={`/comparatif?offer=${offer.name.toLowerCase()}`} class={`inline-block w-full py-2.5 px-4 rounded-xl font-bold text-sm transition-all ${offer.highlight ? 'bg-nashi-600 text-white hover:bg-nashi-900 shadow-md hover:shadow-lg' : 'bg-nashi-100 text-nashi-900 hover:bg-nashi-200'}`}>
+                Comparer & Choisir
+              </a>
+            ) : (
+              <button @click="$dispatch('open-contact-modal', { offer: 'Sur Mesure' })" class="inline-block w-full py-2.5 px-4 rounded-xl font-bold text-sm transition-all bg-nashi-100 text-nashi-900 hover:bg-nashi-200">
+                Demander un devis
+              </button>
+            )}
+          </div>
+        </div>
+      ))}
+    </div>
+    
+    <div class="mt-12 text-center space-y-2">
+        <p class="text-sm text-nashi-900/60 italic">
+            * Tarifs hors taxes. Engagement annuel par défaut.
+        </p>
+        <p class="text-xs text-nashi-900/40" x-show="!annual">
+            * Prix par boîte calculé sur la base maximale de l'offre (5, 15 ou 30 utilisateurs).
+        </p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto mt-8">
+            <!-- Frais de mise en service -->
+            <div class="p-6 bg-nashi-100/50 rounded-xl border border-nashi-200 text-left">
+                <p class="text-sm text-nashi-900 font-medium mb-2 flex items-center gap-2">
+                    <svg class="w-5 h-5 text-nashi-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg>
+                    <span class="font-bold text-nashi-600">Mise en service (One-shot) : 420€ HT</span>
+                </p>
+                <p class="text-xs text-nashi-900/70 leading-relaxed mb-3">
+                    Installation complète de votre socle technique souverain (Conforme NIS2) :<br/>
+                    Audit • Sécurité avancée • Architecture isolée & Chiffrée • Délivrabilité • Branding.
+                </p>
+                <p class="text-xs text-nashi-900/60 italic border-t border-nashi-200 pt-2 mt-2">
+                    Option paiement mensuel via Stripe (+2% frais de gestion).
+                </p>
+            </div>
+
+            <!-- Options & Migration -->
+            <div class="p-6 bg-white/60 rounded-xl border border-nashi-200 text-left">
+                <h4 class="font-bold text-nashi-900 mb-3 text-sm">Options disponibles</h4>
+                <ul class="space-y-3">
+                    <li class="flex items-start gap-2">
+                        <svg class="w-4 h-4 text-nashi-600 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 002 2h2m-2 4h14a2 2 0 002-2V7a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                        <div>
+                            <span class="text-sm font-bold text-nashi-900">Suite Collaborative & Fichiers</span>
+                            <p class="text-xs text-nashi-900/70">Alternative souveraine à 365/Google (Édition en ligne, Partage). <em>Dispo dès offre Pro.</em></p>
+                        </div>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <svg class="w-4 h-4 text-nashi-600 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" /></svg>
+                        <div>
+                            <span class="text-sm font-bold text-nashi-900">Service de Migration Complète</span>
+                            <p class="text-xs text-nashi-900/70">Transfert sécurisé de vos Mails, Calendriers, Contacts et Fichiers depuis votre ancien prestataire.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+  </div>
+</section>
+
+<!-- Alpine.js pour l'interactivité légère -->
+<script is:inline src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
