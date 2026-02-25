@@ -83,7 +83,7 @@ const offers = [
         <button 
             class="relative inline-flex h-8 w-14 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-nashi-500 focus:ring-offset-2"
             :class="annual ? 'bg-nashi-600' : 'bg-nashi-300'"
-            @click="annual = !annual"
+            @click="annual = !annual; window.umami?.track('pricing_billing_toggle', { mode: annual ? 'annual' : 'monthly' })"
         >
             <span class="sr-only">Changer la fréquence de facturation</span>
             <span 
@@ -160,11 +160,11 @@ const offers = [
 
           <div class="text-center mt-auto">
             {offer.maxUsers ? (
-              <a href={`/comparatif?offer=${offer.name.toLowerCase()}`} class={`inline-block w-full py-2.5 px-4 rounded-xl font-bold text-sm transition-all ${offer.highlight ? 'bg-nashi-600 text-white hover:bg-nashi-900 shadow-md hover:shadow-lg' : 'bg-nashi-100 text-nashi-900 hover:bg-nashi-200'}`}>
+              <a href={`/comparatif?offer=${offer.name.toLowerCase()}`} class={`inline-block w-full py-2.5 px-4 rounded-xl font-bold text-sm transition-all ${offer.highlight ? 'bg-nashi-600 text-white hover:bg-nashi-900 shadow-md hover:shadow-lg' : 'bg-nashi-100 text-nashi-900 hover:bg-nashi-200'}`} data-umami-event="pricing_compare_click" data-umami-event-offer={offer.name}>
                 Comparer & Choisir
               </a>
             ) : (
-              <button @click="$dispatch('open-contact-modal', { offer: 'Sur Mesure' })" class="inline-block w-full py-2.5 px-4 rounded-xl font-bold text-sm transition-all bg-nashi-100 text-nashi-900 hover:bg-nashi-200">
+              <button @click="$dispatch('open-contact-modal', { offer: 'Sur Mesure' }); window.umami?.track('pricing_devis_click', { offer: 'Sur Mesure' })" class="inline-block w-full py-2.5 px-4 rounded-xl font-bold text-sm transition-all bg-nashi-100 text-nashi-900 hover:bg-nashi-200">
                 Demander un devis
               </button>
             )}

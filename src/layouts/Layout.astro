@@ -7,6 +7,10 @@ interface Props {
 }
 
 const { title, description = "Découvrez Nashi Cloud : Hébergement web souverain, privé et sécurisé en France. Solutions cloud performantes pour PME et particuliers, respectueuses de vos données." } = Astro.props;
+
+const umamiUrl = import.meta.env.PUBLIC_UMAMI_URL || '';
+const umamiWebsiteId = import.meta.env.PUBLIC_UMAMI_WEBSITE_ID || '';
+const umamiCsp = umamiUrl ? `${umamiUrl}` : '';
 ---
 
 <!doctype html>
@@ -17,7 +21,7 @@ const { title, description = "Découvrez Nashi Cloud : Hébergement web souverai
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="apple-touch-icon" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://cdn.jsdelivr.net https://unpkg.com https://auto2.raphaeldev.fr; script-src 'unsafe-inline' 'unsafe-eval' 'self' https://cdn.jsdelivr.net https://unpkg.com blob: data:; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:;" />
+		<meta http-equiv="Content-Security-Policy" content={`default-src 'self'; connect-src 'self' https://cdn.jsdelivr.net https://unpkg.com https://auto2.raphaeldev.fr ${umamiCsp}; script-src 'unsafe-inline' 'unsafe-eval' 'self' https://cdn.jsdelivr.net https://unpkg.com blob: data: ${umamiCsp}; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:;`} />
 		
 		<!-- SEO Principal -->
 		<title>{title}</title>
@@ -38,6 +42,11 @@ const { title, description = "Découvrez Nashi Cloud : Hébergement web souverai
 		<meta property="twitter:title" content={title} />
 		<meta property="twitter:description" content={description} />
 		<meta property="twitter:image" content="/img/social-share.png" />
+
+		<!-- Umami Analytics -->
+		{umamiUrl && umamiWebsiteId && (
+			<script is:inline async defer data-website-id={umamiWebsiteId} src={`${umamiUrl}/script.js`}></script>
+		)}
 
 		<!-- Easter Egg #1: Pour les curieux qui inspectent le code -->
 		<!-- 

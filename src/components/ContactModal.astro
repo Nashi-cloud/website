@@ -18,11 +18,13 @@
                 if (e.detail && e.detail.offer) {
                     this.formData.offer = e.detail.offer;
                 }
+                window.umami?.track('contact_modal_open', { offer: this.formData.offer || 'none' });
             });
         },
 
         async submitForm() {
             this.step = 'sending';
+            window.umami?.track('contact_form_submit', { offer: this.formData.offer || 'none' });
             
             try {
                 const response = await fetch('https://auto2.raphaeldev.fr/webhook/2bc9b260-94dc-4454-be02-83697768ec38', {
@@ -35,6 +37,7 @@
 
                 if (response.ok) {
                     this.step = 'success';
+                    window.umami?.track('contact_form_success', { offer: this.formData.offer || 'none' });
                     this.formData = { name: '', email: '', company: '', offer: '', message: '' }; // Reset
                 } else {
                     throw new Error('Erreur serveur');
@@ -43,6 +46,7 @@
                 console.error('Erreur envoi formulaire:', error);
                 this.step = 'error';
                 this.errorMessage = 'Une erreur technique est survenue.';
+                window.umami?.track('contact_form_error');
             }
         }
     }"
@@ -70,7 +74,7 @@
             x-transition:leave-start="opacity-100"
             x-transition:leave-end="opacity-0"
             class="fixed inset-0 bg-nashi-900/75 transition-opacity" 
-            @click="open = false"
+            @click="open = false; window.umami?.track('contact_modal_close')"
             aria-hidden="true"
         ></div>
 
@@ -96,7 +100,7 @@
                         <span x-show="step === 'success'">Message envoyé ! 🚀</span>
                         <span x-show="step === 'error'">Oups...</span>
                     </h3>
-                    <button @click="open = false" class="text-gray-400 hover:text-gray-500 transition-colors">
+                    <button @click="open = false; window.umami?.track('contact_modal_close')" class="text-gray-400 hover:text-gray-500 transition-colors">
                         <span class="sr-only">Fermer</span>
                         <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -190,7 +194,7 @@
                         Merci ! Nous avons bien reçu votre demande.<br>
                         Notre équipe technique vous recontactera sous 24h ouvrées.
                     </p>
-                    <button @click="open = false" class="mt-4 w-full inline-flex justify-center rounded-full border border-transparent shadow-sm px-4 py-2 bg-nashi-100 text-base font-medium text-nashi-900 hover:bg-nashi-200 focus:outline-none sm:text-sm">
+                    <button @click="open = false; window.umami?.track('contact_modal_close')" class="mt-4 w-full inline-flex justify-center rounded-full border border-transparent shadow-sm px-4 py-2 bg-nashi-100 text-base font-medium text-nashi-900 hover:bg-nashi-200 focus:outline-none sm:text-sm">
                         Fermer
                     </button>
                 </div>
@@ -209,7 +213,7 @@
                         <p class="text-sm text-gray-500 mb-2">Pas de panique, vous pouvez nous écrire directement :</p>
                         <a href="mailto:contact@nashi.cloud" class="text-nashi-600 font-bold hover:underline">contact@nashi.cloud</a>
                     </div>
-                    <button @click="step = 'form'" class="mt-4 text-sm text-gray-500 hover:text-gray-700 underline">
+                    <button @click="step = 'form'; window.umami?.track('contact_form_retry')" class="mt-4 text-sm text-gray-500 hover:text-gray-700 underline">
                         Réessayer
                     </button>
                 </div>

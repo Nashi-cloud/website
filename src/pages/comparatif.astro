@@ -178,7 +178,7 @@ const comparisonData = [
             <p class="text-nashi-100/80 text-lg mb-8 max-w-2xl mx-auto">
                 Rejoignez les entreprises qui ont choisi l'indépendance numérique sans sacrifier leur trésorerie.
             </p>
-            <button @click="$dispatch('open-contact-modal', { offer: currentOffer })" class="inline-block px-8 py-4 rounded-full bg-nashi-500 text-nashi-900 font-bold text-lg hover:bg-white transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+            <button @click="$dispatch('open-contact-modal', { offer: currentOffer }); window.umami?.track('comparatif_cta_contact', { offer: currentOffer })" class="inline-block px-8 py-4 rounded-full bg-nashi-500 text-nashi-900 font-bold text-lg hover:bg-white transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1">
                 Demander mon installation
             </button>
         </div>
@@ -229,6 +229,7 @@ const comparisonData = [
               setOffer(offerKey) {
                   this.currentOffer = offerKey;
                   this.updateChart();
+                  window.umami?.track('comparatif_offer_select', { offer: offerKey });
               },
 
               getData() {
