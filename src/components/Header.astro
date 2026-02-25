@@ -13,15 +13,15 @@
 
       <!-- Desktop Menu -->
       <nav class="hidden md:flex items-center space-x-8">
-        <a href="/#lab-stack" class="text-nashi-900 hover:text-nashi-600 font-medium transition-colors">Stack de Veille</a>
-        <a href="https://mykomy.com" target="_blank" rel="noopener noreferrer" class="px-5 py-2.5 rounded-full bg-nashi-900 text-nashi-100 font-semibold hover:bg-nashi-600 hover:text-white transition-all shadow-sm hover:shadow-md">
+        <a href="/#lab-stack" class="text-nashi-900 hover:text-nashi-600 font-medium transition-colors" data-umami-event="nav_lab_stack">Stack de Veille</a>
+        <a href="https://mykomy.com" target="_blank" rel="noopener noreferrer" class="px-5 py-2.5 rounded-full bg-nashi-900 text-nashi-100 font-semibold hover:bg-nashi-600 hover:text-white transition-all shadow-sm hover:shadow-md" data-umami-event="nav_mykomy">
           Découvrir mykomy
         </a>
       </nav>
 
       <!-- Mobile Menu Button -->
       <div class="md:hidden flex items-center">
-        <button id="mobile-menu-button" class="text-nashi-900 hover:text-nashi-600 focus:outline-none p-2">
+        <button id="mobile-menu-button" class="text-nashi-900 hover:text-nashi-600 focus:outline-none p-2" data-umami-event="nav_mobile_menu_open">
           <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
           </svg>
@@ -33,8 +33,8 @@
   <!-- Mobile Menu Panel -->
   <div id="mobile-menu" class="hidden md:hidden bg-nashi-100 border-b border-nashi-200 absolute w-full left-0 top-20 shadow-lg">
     <div class="px-4 pt-2 pb-6 space-y-2">
-      <a href="/#lab-stack" class="block px-3 py-2 rounded-md text-base font-medium text-nashi-900 hover:text-nashi-600 hover:bg-nashi-200 transition-colors">Stack de Veille</a>
-      <a href="https://mykomy.com" target="_blank" rel="noopener noreferrer" class="block px-3 py-2 mt-4 text-center rounded-full bg-nashi-900 text-nashi-100 font-semibold hover:bg-nashi-600 hover:text-white transition-all">
+      <a href="/#lab-stack" class="block px-3 py-2 rounded-md text-base font-medium text-nashi-900 hover:text-nashi-600 hover:bg-nashi-200 transition-colors" data-umami-event="nav_mobile_lab_stack">Stack de Veille</a>
+      <a href="https://mykomy.com" target="_blank" rel="noopener noreferrer" class="block px-3 py-2 mt-4 text-center rounded-full bg-nashi-900 text-nashi-100 font-semibold hover:bg-nashi-600 hover:text-white transition-all" data-umami-event="nav_mobile_mykomy">
         Découvrir mykomy
       </a>
     </div>
